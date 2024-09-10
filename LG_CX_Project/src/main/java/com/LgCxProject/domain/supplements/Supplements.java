@@ -7,8 +7,6 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "tb_supplement_info")
 public class Supplements {
-    Supplements supplement;
-
     @Id
     private String supplement_id;
     private String supplement_name;

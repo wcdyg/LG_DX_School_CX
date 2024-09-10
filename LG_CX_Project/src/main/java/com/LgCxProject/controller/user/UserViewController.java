@@ -60,7 +60,7 @@ public class UserViewController {
     }
 
     // 로그아웃하기
-    @PostMapping("/logout")
+    @GetMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate();
         return "redirect:/user/login";

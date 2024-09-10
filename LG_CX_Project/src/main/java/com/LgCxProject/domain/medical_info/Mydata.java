@@ -6,10 +6,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "tb_mydate")
-public class Mydate {
-
-
+@Table(name = "tb_mydata")
+public class Mydata {
     @Id
     private String medical_treatment_id;
     @Id

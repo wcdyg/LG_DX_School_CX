@@ -10,8 +10,6 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "tb_product")
 public class Dispenser {
-    Dispenser dispenser;
-
     @Id
     private String product_id;
     private LocalDate manufacture_date;
