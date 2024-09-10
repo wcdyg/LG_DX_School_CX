@@ -10,20 +10,11 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "tb_product")
 public class Dispenser {
-    Dispenser dispenser;
 
     @Id
     private String product_id;
     private LocalDate manufacture_date;
     private String manufacture_company;
-
-    public Dispenser getDispenser() {
-        return dispenser;
-    }
-
-    public void setDispenser(Dispenser dispenser) {
-        this.dispenser = dispenser;
-    }
 
     public String getProduct_id() {
         return product_id;
@@ -52,8 +43,7 @@ public class Dispenser {
     @Override
     public String toString() {
         return "Dispenser{" +
-                "dispenser=" + dispenser +
-                ", product_id='" + product_id + '\'' +
+                "product_id='" + product_id + '\'' +
                 ", manufacture_date=" + manufacture_date +
                 ", manufacture_company='" + manufacture_company + '\'' +
                 '}';

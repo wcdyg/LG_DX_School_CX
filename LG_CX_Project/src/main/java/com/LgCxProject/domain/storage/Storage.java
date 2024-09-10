@@ -7,7 +7,6 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "tb_storage")
 public class Storage {
-    Storage storage;
 
     @Id
     private String storage_id;
@@ -17,14 +16,6 @@ public class Storage {
 
     private String supplement_id;
     private int stock;
-
-    public Storage getStorage() {
-        return storage;
-    }
-
-    public void setStorage(Storage storage) {
-        this.storage = storage;
-    }
 
     public String getStorage_id() {
         return storage_id;
@@ -61,8 +52,7 @@ public class Storage {
     @Override
     public String toString() {
         return "Storage{" +
-                "storage=" + storage +
-                ", storage_id='" + storage_id + '\'' +
+                "storage_id='" + storage_id + '\'' +
                 ", product_id='" + product_id + '\'' +
                 ", supplement_id='" + supplement_id + '\'' +
                 ", stock=" + stock +

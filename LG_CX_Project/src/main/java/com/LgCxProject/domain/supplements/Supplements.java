@@ -7,7 +7,6 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "tb_supplement_info")
 public class Supplements {
-    Supplements supplement;
 
     @Id
     private String supplement_id;
@@ -17,14 +16,6 @@ public class Supplements {
     private String intake_amount;
     private String intake_frequency;
     private String medication_precautions;
-
-    public Supplements getSupplement() {
-        return supplement;
-    }
-
-    public void setSupplement(Supplements supplement) {
-        this.supplement = supplement;
-    }
 
     public String getSupplement_id() {
         return supplement_id;
@@ -85,8 +76,7 @@ public class Supplements {
     @Override
     public String toString() {
         return "Supplements{" +
-                "supplement=" + supplement +
-                ", supplement_id='" + supplement_id + '\'' +
+                "supplement_id='" + supplement_id + '\'' +
                 ", supplement_name='" + supplement_name + '\'' +
                 ", supplement_capacity=" + supplement_capacity +
                 ", main_ingredients='" + main_ingredients + '\'' +
