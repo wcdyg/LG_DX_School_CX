@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${pageTitle}">디스펜서 화면(영양제 등록 전)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <script type="importmap">
+        {
+          "imports": {
+            "@material/web/": "https://esm.run/@material/web/"
+          }
+        }
+    </script>
+    <script type="module">
+        import '@material/web/all.js';
+        import {styles as typescaleStyles} from '@material/web/typography/md-typescale-styles.js';
+
+        document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
+    </script>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            margin-bottom: 40px;
+        }
+        .dispenser-options {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            max-width: 800px;
+        }
+        .option {
+            text-align: center;
+        }
+        md-filled-icon-button {
+            --md-filled-icon-button-container-color: #6750A4;
+            --md-filled-icon-button-icon-color: white;
+        }
+    </style>
+</head>
+<body>
+<h1 th:text="${headerText}">디스펜서 화면(영양제 등록 전)</h1>
+<div class="dispenser-options">
+    <div class="option">
+        <p th:text="${option1Text}">보관함 5에 영양제 추가하는 버튼</p>
+        <md-filled-icon-button>
+            <md-icon>add</md-icon>
+        </md-filled-icon-button>
+    </div>
+    <div class="option">
+        <p th:text="${option2Text}">보관함 6에 영양제 추가하는 버튼</p>
+        <md-filled-icon-button>
+            <md-icon>add</md-icon>
+        </md-filled-icon-button>
+    </div>
+</div>
+</body>
+</html>

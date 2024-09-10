@@ -15,38 +15,41 @@
 
 # 디렉토리 구조 및 설명
 ```angular2html
-/my-springboot-project
-│
-├── /frontend                     # 프론트엔드 관련 폴더
-│   ├── /node_modules             # npm 패키지들
-│   ├── /src                      # 프론트엔드 소스 파일 (CSS, JS 등)
-│   │   ├── /components           # 재사용 가능한 UI 컴포넌트
-│   │   ├── /assets               # 이미지, 폰트 등의 정적 자산
-│   │   └── /styles               # CSS/SCSS 파일
-│   ├── /dist                     # 빌드된 파일
-│   ├── package.json              # npm 설정 파일
-│   ├── webpack.config.js         # (필요 시) Webpack 설정 파일
-│   └── .babelrc                  # (필요 시) Babel 설정 파일
+/LG_CX_Project
 │
 ├── /src
 │   ├── /main
 │   │   ├── /java                 # Spring Boot Java 코드
 │   │   │   └── /com
 │   │   │       └── /example
-│   │   │           └── /project  # Controller, Service, Repository 등 백엔드 파일
-│   │   ├── /resources
-│   │   │   ├── /static           # 빌드된 프론트엔드 정적 파일 배치
-│   │   │   │   ├── /css          # 빌드된 CSS 파일
-│   │   │   │   ├── /js           # 빌드된 JS 파일
-│   │   │   └── /templates        # Thymeleaf 템플릿 파일
-│   │   └── /application.properties  # Spring Boot 설정 파일
+│   │   │           └── /project
+│   │   │               ├── /controller  # 컨트롤러 클래스들
+│   │   │               ├── /service     # 서비스 클래스들
+│   │   │               ├── /repository  # 레포지토리 클래스들
+│   │   │               └── /model       # 모델/엔티티 클래스들
+│   │   └── /resources
+│   │       ├── /static           # 정적 파일
+│   │       │   ├── /css          # CSS 파일
+│   │       │   ├── /js           # JavaScript 파일
+│   │       │   └── /images       # 이미지 파일
+│   │       ├── /templates        # Thymeleaf 템플릿 파일
+│   │       └── application.properties  # Spring Boot 설정 파일
+│   │
+│   └── /test                     # 테스트 코드
+│       └── /java
+│           └── /com
+│               └── /example
+│                   └── /project
 │
-├── /test                         # 테스트 관련 폴더
-│   └── /java                     # Java 테스트 코드
+├── /build                        # Gradle 빌드 출력 디렉토리 (빌드 시 자동 생성)
 │
-├── /target                       # Maven 빌드 파일 (빌드 후 생성)
-│ 
-└── README.md                     # 프로젝트 설명 파일
+├── build.gradle                  # Gradle 빌드 스크립트
+├── settings.gradle               # Gradle 설정 파일
+│
+├── gradlew                       # Gradle 래퍼 스크립트 (Unix)
+├── gradlew.bat                   # Gradle 래퍼 스크립트 (Windows)
+│
+└── README.md    
 ```
 
 
