@@ -7,8 +7,6 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "tb_storage")
 public class Storage {
-    Storage storage;
-
     @Id
     private String storage_id;
 
