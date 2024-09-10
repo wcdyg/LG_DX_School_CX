@@ -14,15 +14,16 @@ public class UserService {
     UserRepository userRepository;
 
     // 사용자 로그인 기능 - 입력한 아이디와 비밀번호가 DB에 있는지 확인하는 기능
-    public boolean login(String userId, String password) throws RuntimeException {
+    public User login(String userId, String password) throws RuntimeException {
 
-        User userInfo = userRepository.findUserByIdAndPassword(userId, password);
+        User user = userRepository.findUserByIdAndPassword(userId, password);
 
-        if(userInfo != null) {
-            return true;    // 사용자가 있습니다.
-        } else {
-            return false;   // 사용자가 없습니다.
-        }
+//        if(userInfo != null) {
+//            return true;    // 사용자가 있습니다.
+//        } else {
+//            return false;   // 사용자가 없습니다.
+//        }
+        return user;
     }
 
     // 사용자 회원가입
@@ -44,6 +45,7 @@ public class UserService {
         userRepository.save(user);
         return true;
     }
+
     // 아이디 중복 검사
     public boolean isUserAlreadyExists(String userId) {
         return userRepository.findByUserId(userId).isPresent();
