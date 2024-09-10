@@ -40,8 +40,11 @@
     </style>
 </head>
 <body>
-<h1 th:text="${headerText}">홈 > 제품카드 선택 화면</h1>
-<md-filled-button th:text="${buttonText}">배너 선택하기</md-filled-button>
+<h1>홈 > 제품카드 선택 화면</h1>
+
+<form action="/storage/storage" method="get">
+    <md-filled-button>배너 선택하기</md-filled-button>
+<h1 class="mt-4">환영합니다. <span th:text="${username}"></span> 님</h1>
 
 <div th:if="${showAdditionalInfo}">
     <p th:text="${additionalInfo}"></p>

@@ -9,7 +9,6 @@ import jakarta.persistence.Table;
 public class Storage {
     @Id
     private String storage_id;
-
     @Id
     private String product_id;
 

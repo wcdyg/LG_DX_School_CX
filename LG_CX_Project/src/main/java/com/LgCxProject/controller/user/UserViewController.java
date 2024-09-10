@@ -61,7 +61,8 @@ public class UserViewController {
 
     // 로그아웃하기
     @GetMapping("/logout")
-    public String logout(HttpSession session) {
+    public String logout(HttpSession session, Model model) {
+//        System.out.println(session.getAttribute("userId"));
         session.invalidate();
         return "redirect:/user/login";
     }

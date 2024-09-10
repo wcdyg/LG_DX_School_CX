@@ -17,9 +17,25 @@ public class HomeViewController {
         model.addAttribute("username" , session.getAttribute("username"));
         model.addAttribute("userId", session.getAttribute("userId"));
 
+        //  기기 정보 보여주기?!
 //        List<Review> reviews = reviewService.findAllReviews();
 //        model.addAttribute("reviews", reviews);
 
         return "/home";
     }
+
+    //  배너 선택시 (디스펜서) 저장소 정보 보기
+    @GetMapping("/storage/storage")
+    public String storage(HttpSession session , Model model) {
+        if(session.getAttribute("username") == null) {
+            return "/user/login";
+        }
+        model.addAttribute("username" , session.getAttribute("username"));
+        model.addAttribute("userId", session.getAttribute("userId"));
+
+
+        return "/home";
+    }
+
+
 }
