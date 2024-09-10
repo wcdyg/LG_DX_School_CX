@@ -8,8 +8,6 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "tb_user")
 public class User {
-    User user;
-
     @Id
     @Column(name = "user_id")
     private String userId;
