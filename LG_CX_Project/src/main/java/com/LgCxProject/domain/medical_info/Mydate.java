@@ -9,11 +9,13 @@ import jakarta.persistence.Table;
 @Table(name = "tb_mydate")
 public class Mydate {
 
+
     @Id
+    private String medical_treatment_id;
+    @Id
+    private String drug_name;
     @Column(name = "user_id")
     private String userId;
-    private String medical_treatment_id;
-    private String drug_name;
     private int medical_treatment_date;
     private String diagnosis_name;
     private String drug_ingredient;
