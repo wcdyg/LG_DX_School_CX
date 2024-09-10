@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${pageTitle}">영양제 등록 화면</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <script type="importmap">
+        {
+          "imports": {
+            "@material/web/": "https://esm.run/@material/web/"
+          }
+        }
+    </script>
+    <script type="module">
+        import '@material/web/all.js';
+        import {styles as typescaleStyles} from '@material/web/typography/md-typescale-styles.js';
+
+        document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
+    </script>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        h1, h2 {
+            margin-bottom: 20px;
+        }
+        .time-picker {
+            background-color: #e8e0ff;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+        .time-display {
+            font-size: 48px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .am-pm {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 10px;
+        }
+        .time-labels {
+            display: flex;
+            justify-content: space-between;
+        }
+        .time-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+        md-filled-button {
+            --md-filled-button-container-color: #6750A4;
+            --md-filled-button-label-text-color: white;
+        }
+    </style>
+</head>
+<body>
+<h1 th:text="${headerText}">영양제 등록 화면</h1>
+<h2 th:text="${subHeaderText}">영양제 이름, 성분 종류 출력<br>섭취 방법(횟수, 양) 출력</h2>
+<div class="time-picker">
+    <div class="time-display">20 : 00</div>
+    <div class="am-pm">
+        <md-outlined-button>AM</md-outlined-button>
+        <md-filled-button>PM</md-filled-button>
+    </div>
+    <div class="time-labels">
+        <span>Hour</span>
+        <span>Minute</span>
+    </div>
+    <div class="time-actions">
+        <md-text-button>Cancel</md-text-button>
+        <md-text-button>OK</md-text-button>
+    </div>
+</div>
+<md-filled-button th:text="${buttonText}">섭취 시간 설정하기</md-filled-button>
+</body>
+</html>
