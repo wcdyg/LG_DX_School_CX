@@ -1,4 +1,5 @@
 package com.LgCxProject.domain.medical_info;
+import com.LgCxProject.domain.user.User;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
