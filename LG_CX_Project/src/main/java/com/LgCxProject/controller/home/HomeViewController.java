@@ -30,11 +30,11 @@ public class HomeViewController {
         if(session.getAttribute("username") == null) {
             return "/user/login";
         }
-        model.addAttribute("username" , session.getAttribute("username"));
-        model.addAttribute("userId", session.getAttribute("userId"));
+        model.addAttribute("headerText", "디스펜서 화면(영양제 등록 전)");
+        model.addAttribute("option1Text", "보관함 5에 영양제 추가하는 버튼");
+        model.addAttribute("option2Text", "보관함 6에 영양제 추가하는 버튼");
 
-
-        return "/home";
+        return "/storage/storage";
     }
 
 
