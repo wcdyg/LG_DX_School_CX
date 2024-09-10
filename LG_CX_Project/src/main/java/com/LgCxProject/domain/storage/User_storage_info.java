@@ -10,9 +10,9 @@ import java.time.LocalDate;
 public class User_storage_info {
 
     @Id
+    private String info_num;
     @Column(name = "user_id")
     private String userId;
-    private String info_num;
     private String storage_id;
     private LocalDate medical_treatment_date;
     private String product_id;
