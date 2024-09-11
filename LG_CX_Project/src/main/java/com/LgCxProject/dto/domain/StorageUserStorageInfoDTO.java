@@ -1,9 +1,12 @@
-package com.LgCxProject.dto;
+package com.LgCxProject.dto.domain;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Date;
 
 public class StorageUserStorageInfoDTO {
-
 
     private String storageId;           // STORAGE_ID
     private String productId;           // PRODUCT_ID
@@ -12,13 +15,14 @@ public class StorageUserStorageInfoDTO {
     private String infoNum;             // INFO_NUM
     private String userId;              // USER_ID
     private int suppleOutAmount;        // SUPPLE_OUT_AMOUNT
-    private Date intakeTime;            // INTAKE_TIME
-    private Date registTime;            // REGIST_TIME
-    private Date medicalTreatmentDate;  // MEDICAL_TREATMENT_DATE
+    private LocalTime intakeTime;            // INTAKE_TIME
+    private LocalDateTime registTime;            // REGIST_TIME
 
     // 생성자
+    public StorageUserStorageInfoDTO() {}
+
     public StorageUserStorageInfoDTO(String storageId, String productId, String supplementId, int stock, String infoNum,
-                                     String userId, int suppleOutAmount, Date intakeTime, Date registTime, Date medicalTreatmentDate) {
+                                     String userId, int suppleOutAmount, LocalTime intakeTime, LocalDateTime registTime) {
         this.storageId = storageId;
         this.productId = productId;
         this.supplementId = supplementId;
@@ -28,10 +32,7 @@ public class StorageUserStorageInfoDTO {
         this.suppleOutAmount = suppleOutAmount;
         this.intakeTime = intakeTime;
         this.registTime = registTime;
-        this.medicalTreatmentDate = medicalTreatmentDate;
     }
-
-    // getters, setters
 
     public String getStorageId() {
         return storageId;
@@ -89,28 +90,20 @@ public class StorageUserStorageInfoDTO {
         this.suppleOutAmount = suppleOutAmount;
     }
 
-    public Date getIntakeTime() {
+    public LocalTime getIntakeTime() {
         return intakeTime;
     }
 
-    public void setIntakeTime(Date intakeTime) {
+    public void setIntakeTime(LocalTime intakeTime) {
         this.intakeTime = intakeTime;
     }
 
-    public Date getRegistTime() {
+    public LocalDateTime getRegistTime() {
         return registTime;
     }
 
-    public void setRegistTime(Date registTime) {
+    public void setRegistTime(LocalDateTime registTime) {
         this.registTime = registTime;
-    }
-
-    public Date getMedicalTreatmentDate() {
-        return medicalTreatmentDate;
-    }
-
-    public void setMedicalTreatmentDate(Date medicalTreatmentDate) {
-        this.medicalTreatmentDate = medicalTreatmentDate;
     }
 
     @Override
@@ -125,7 +118,6 @@ public class StorageUserStorageInfoDTO {
                 ", suppleOutAmount=" + suppleOutAmount +
                 ", intakeTime=" + intakeTime +
                 ", registTime=" + registTime +
-                ", medicalTreatmentDate=" + medicalTreatmentDate +
                 '}';
     }
 }

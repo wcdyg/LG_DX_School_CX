@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Entity
 @Table(name = "tb_user_storage_info")
@@ -12,6 +14,9 @@ public class UserStorageInfo {
     @Id
     @Column(name = "info_num") // 'info_num' 열과 매핑
     private String infoNum;
+
+    @Column(name = "supplement_id") // 'supplement_id' 열과 매핑
+    private String supplementId;
 
     @Column(name = "user_id") // 'user_id' 열과 매핑
     private String userId;
@@ -22,17 +27,14 @@ public class UserStorageInfo {
     @Column(name = "product_id") // 'product_id' 열과 매핑
     private String productId;
 
-    @Column(name = "supplement_id") // 'supplement_id' 열과 매핑
-    private String supplementId;
-
     @Column(name = "supple_out_amount") // 'supple_out_amount' 열과 매핑
     private int suppleOutAmount;
 
     @Column(name = "intake_time") // 'intake_time' 열과 매핑
-    private LocalDate intakeTime;
+    private LocalTime intakeTime;
 
     @Column(name = "regist_time") // 'regist_time' 열과 매핑
-    private LocalDate registTime;
+    private LocalDateTime registTime;
 
 
     public String getInfoNum() {
@@ -83,19 +85,19 @@ public class UserStorageInfo {
         this.suppleOutAmount = suppleOutAmount;
     }
 
-    public LocalDate getIntakeTime() {
+    public LocalTime getIntakeTime() {
         return intakeTime;
     }
 
-    public void setIntakeTime(LocalDate intakeTime) {
+    public void setIntakeTime(LocalTime intakeTime) {
         this.intakeTime = intakeTime;
     }
 
-    public LocalDate getRegistTime() {
+    public LocalDateTime getRegistTime() {
         return registTime;
     }
 
-    public void setRegistTime(LocalDate registTime) {
+    public void setRegistTime(LocalDateTime registTime) {
         this.registTime = registTime;
     }
 

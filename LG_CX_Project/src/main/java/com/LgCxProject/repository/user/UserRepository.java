@@ -13,6 +13,9 @@ public interface UserRepository extends JpaRepository<User, String> {
     User findUserByIdAndPassword(@Param(value="userId") String userId,
                                  @Param(value="password") String password);
 
+    // USER_ID를 통한 USER(DOMAIN)가져오기
+    // = NAME
     Optional<User> findByUserId(String userId);
+
 
 }

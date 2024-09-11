@@ -17,12 +17,6 @@ public class UserService {
     public User login(String userId, String password) throws RuntimeException {
 
         User user = userRepository.findUserByIdAndPassword(userId, password);
-
-//        if(userInfo != null) {
-//            return true;    // 사용자가 있습니다.
-//        } else {
-//            return false;   // 사용자가 없습니다.
-//        }
         return user;
     }
 
@@ -51,8 +45,5 @@ public class UserService {
         return userRepository.findByUserId(userId).isPresent();
         // 값이 있으면 값, 아니면 null
     }
-
-
-
 
 }

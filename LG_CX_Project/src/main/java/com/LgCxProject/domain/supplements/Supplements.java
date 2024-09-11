@@ -1,5 +1,6 @@
 package com.LgCxProject.domain.supplements;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -8,97 +9,106 @@ import jakarta.persistence.Table;
 @Table(name = "tb_supplement_info")
 public class Supplements {
 
-    @Id
-    private String supplement_id;
-    private String supplement_name;
-    private int supplement_capacity;
-    private String main_ingredients;
-    private String intake_amount;
-    private String intake_frequency;
-    private String medication_precautions;
-    private String intake_method;
+    @Id  // 기본 키로 매핑
+    @Column(name = "supplement_id")
+    private String supplementId;
 
-    public String getSupplement_id() {
-        return supplement_id;
+    @Column(name = "supplement_name")
+    private String supplementName;
+
+    @Column(name = "supplement_capacity")
+    private int supplementCapacity;
+
+    @Column(name = "main_ingredients")
+    private String mainIngredients;
+
+    @Column(name = "intake_amount")
+    private int intakeAmount;
+
+    @Column(name = "intake_frequency")
+    private int intakeFrequency;
+
+    @Column(name = "medication_precautions")
+    private String medicationPrecautions;
+
+    @Column(name = "intake_method")
+    private String intakeMethod;
+
+    public String getSupplementId() {
+        return supplementId;
     }
 
-    public void setSupplement_id(String supplement_id) {
-        this.supplement_id = supplement_id;
+    public void setSupplementId(String supplementId) {
+        this.supplementId = supplementId;
     }
 
-    public String getSupplement_name() {
-        return supplement_name;
+    public String getSupplementName() {
+        return supplementName;
     }
 
-    public void setSupplement_name(String supplement_name) {
-        this.supplement_name = supplement_name;
+    public void setSupplementName(String supplementName) {
+        this.supplementName = supplementName;
     }
 
-    public int getSupplement_capacity() {
-        return supplement_capacity;
+    public int getSupplementCapacity() {
+        return supplementCapacity;
     }
 
-    public void setSupplement_capacity(int supplement_capacity) {
-        this.supplement_capacity = supplement_capacity;
+    public void setSupplementCapacity(int supplementCapacity) {
+        this.supplementCapacity = supplementCapacity;
     }
 
-    public String getMain_ingredients() {
-        return main_ingredients;
+    public String getMainIngredients() {
+        return mainIngredients;
     }
 
-    public void setMain_ingredients(String main_ingredients) {
-        this.main_ingredients = main_ingredients;
+    public void setMainIngredients(String mainIngredients) {
+        this.mainIngredients = mainIngredients;
     }
 
-    public String getIntake_amount() {
-        return intake_amount;
+    public int getIntakeAmount() {
+        return intakeAmount;
     }
 
-    public void setIntake_amount(String intake_amount) {
-        this.intake_amount = intake_amount;
+    public void setIntakeAmount(int intakeAmount) {
+        this.intakeAmount = intakeAmount;
     }
 
-    public String getIntake_frequency() {
-        return intake_frequency;
+    public int getIntakeFrequency() {
+        return intakeFrequency;
     }
 
-    public void setIntake_frequency(String intake_frequency) {
-        this.intake_frequency = intake_frequency;
+    public void setIntakeFrequency(int intakeFrequency) {
+        this.intakeFrequency = intakeFrequency;
     }
 
-    public String getMedication_precautions() {
-        return medication_precautions;
+    public String getMedicationPrecautions() {
+        return medicationPrecautions;
     }
 
-    public void setMedication_precautions(String medication_precautions) {
-        this.medication_precautions = medication_precautions;
+    public void setMedicationPrecautions(String medicationPrecautions) {
+        this.medicationPrecautions = medicationPrecautions;
     }
 
-<<<<<<< HEAD
-    public String getIntake_method() {
-        return intake_method;
+    public String getIntakeMethod() {
+        return intakeMethod;
     }
 
-    public void setIntake_method(String intake_method) {
-        this.intake_method = intake_method;
+    public void setIntakeMethod(String intakeMethod) {
+        this.intakeMethod = intakeMethod;
     }
 
-=======
->>>>>>> 7a88bb3af641395ca8e72c1bc0703399579d4b27
     @Override
     public String toString() {
         return "Supplements{" +
-                "supplement_id='" + supplement_id + '\'' +
-                ", supplement_name='" + supplement_name + '\'' +
-                ", supplement_capacity=" + supplement_capacity +
-                ", main_ingredients='" + main_ingredients + '\'' +
-                ", intake_amount='" + intake_amount + '\'' +
-                ", intake_frequency='" + intake_frequency + '\'' +
-                ", medication_precautions='" + medication_precautions + '\'' +
-<<<<<<< HEAD
-                ", intake_method='" + intake_method + '\'' +
-=======
->>>>>>> 7a88bb3af641395ca8e72c1bc0703399579d4b27
+                "supplementId='" + supplementId + '\'' +
+                ", supplementName='" + supplementName + '\'' +
+                ", supplementCapacity=" + supplementCapacity +
+                ", mainIngredients='" + mainIngredients + '\'' +
+                ", intakeAmount='" + intakeAmount + '\'' +
+                ", intakeFrequency='" + intakeFrequency + '\'' +
+                ", medicationPrecautions='" + medicationPrecautions + '\'' +
+                ", intakeMethod='" + intakeMethod + '\'' +
                 '}';
     }
 }
