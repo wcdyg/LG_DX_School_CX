@@ -1,12 +1,25 @@
 package com.LgCxProject.controller.home;
 
+import com.LgCxProject.domain.storage.Storage;
+import com.LgCxProject.domain.storage.UserStorageInfo;
+import com.LgCxProject.service.storage.StorageService;
+import com.LgCxProject.service.storage.UserStorageService;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.util.List;
+
 @Controller
 public class HomeViewController {
+
+    @Autowired
+    UserStorageService userStorageService;
+
+    @Autowired
+    StorageService storageService;
 
     //  홈 화면
     @GetMapping("/home")
@@ -30,11 +43,34 @@ public class HomeViewController {
         if(session.getAttribute("username") == null) {
             return "/user/login";
         }
-        model.addAttribute("username" , session.getAttribute("username"));
-        model.addAttribute("userId", session.getAttribute("userId"));
+        String userId = (String) session.getAttribute("userId");
 
+        List<Storage> storageInfoList = storageService.findAllStorage();
 
-        return "/home";
+        System.out.println(userId);
+
+        List<UserStorageInfo> userStorageInfoList = userStorageService.findStorageByUserId(userId);
+        // 해당 storage_id로 찾아야함 그 리스트 안에서
+//        userStorageInfoList.get(0).getStorage_id()
+
+        model.addAttribute("optionText1", userStorageInfoList.get(0).getStorageId() +
+                " 번의 재고량 " + storageInfoList.get(0).getStock());
+        model.addAttribute("optionText2", userStorageInfoList.get(1).getStorageId() +
+                " 번의 재고량 " + storageInfoList.get(1).getStock());
+        if user -== colvar = blue
+
+        for(int i = 0; i < storageInfoList.size(); i++){
+            String stockNum = "stockNum%d".formatted(i);
+            String stock = "stock%d".formatted(i);
+
+            model.addAttribute(stockNum, storageInfoList.get(i).getStorageId());
+            model.addAttribute(stock, storageInfoList.get(i).getStock());
+        }
+
+//        if (!userStorageInfoList.isEmpty()){
+//        }
+
+        return "/storage/storage";
     }
 
 

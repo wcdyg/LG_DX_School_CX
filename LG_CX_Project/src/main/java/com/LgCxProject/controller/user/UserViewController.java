@@ -42,7 +42,7 @@ public class UserViewController {
         User user = userService.login(userId,password);
 
         if(user != null) {
-            model.addAttribute("username", user.getName());
+//            model.addAttribute("username", user.getName());
             session.setAttribute("userId", user.getUserId());
             session.setAttribute("username", user.getName());
 
@@ -62,7 +62,7 @@ public class UserViewController {
     // 로그아웃하기
     @GetMapping("/logout")
     public String logout(HttpSession session, Model model) {
-//        System.out.println(session.getAttribute("userId"));
+        System.out.println(session.getAttribute("userId"));
         session.invalidate();
         return "redirect:/user/login";
     }
