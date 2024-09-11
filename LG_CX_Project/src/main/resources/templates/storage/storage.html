@@ -3,88 +3,98 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title th:text="${pageTitle}">디스펜서 화면(영양제 등록 전)</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <script type="importmap">
-        {
-          "imports": {
-            "@material/web/": "https://esm.run/@material/web/"
-          }
-        }
-    </script>
-    <script type="module">
-        import '@material/web/all.js';
-        import {styles as typescaleStyles} from '@material/web/typography/md-typescale-styles.js';
-
-        document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
-    </script>
+    <title>storage</title>
     <style>
         body {
-            font-family: 'Roboto', sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 20px;
-            background-color: #f5f5f5;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
         }
-        h1 {
-            margin-bottom: 40px;
-        }
-        .dispenser-options {
+
+        .container {
             display: flex;
-            justify-content: space-around;
-            width: 100%;
-            max-width: 800px;
+            flex-direction: column;
+            gap: 20px;
         }
-        .option {
-            text-align: center;
+
+        .row {
+            display: flex;
+            gap: 20px;
         }
-        md-filled-icon-button {
-            --md-filled-icon-button-container-color: #6750A4;
-            --md-filled-icon-button-icon-color: white;
+
+        .rectangle {
+            width: 300px;
+            height: 250px;
+            border-radius: 8px;
+            position: relative;
+            padding: 20px;
+            color: white;
+        }
+
+        .rectangle span, .rectangle div[th\\:text] {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: left;
+        }
+
+        .rectangle .bottom-left {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            font-size: 14px;
+        }
+
+        .rectangle form {
+            padding: 8px 16px;
+            font-size: 14px;
+            color: white;
+            background-color: #007bff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+        }
+
+        .md-filled-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 4px 12px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
         }
     </style>
 </head>
-<body>
-<h1 th:text="${headerText}">디스펜서 화면(영양제 등록 전)</h1>
-<div class="dispenser-options">
-    <div class="option">
-<<<<<<< HEAD
-        <p>보관함 <p th:text="${optionText1}"><color = th:text{ $blue/p></p>
-        <md-filled-icon-button>
-            <md-icon>add</md-icon>
-        </md-filled-icon-button>
-    </div>
-    <div class="option">
-        <p>보관함 <p th:text="${optionText2}"></p>에 영양제 추가하는 버튼</p>
-        <md-filled-icon-button>
-            <md-icon>add</md-icon>
-        </md-filled-icon-button>
-=======
-        <p th:text="${option1Text}">보관함 5에 영양제 추가하는 버튼</p>
-        <form action="/scan" method="get"><input type="hidden" name="storage" value="5"> <!-- 보관함 정보를 hidden 필드로 설정 -->
-            <md-filled-icon-button type="submit">
-                <md-icon>add</md-icon>
-            </md-filled-icon-button>
-        </form>
 
+
+<body>
+<div class="container">
+    <div class="row">
+        <div class="rectangle" th:style="'background-color: ' + ${container1Color}">
+            <div th:text="${container1}"></div>
+            <div class="bottom-left" th:text="'보관함에 적재된 영양제 : ' + ${container1SupplementCount} + '개'"></div>
+        </div>
+        <div class="rectangle" th:style="'background-color: ' + ${container2Color}">
+            <div th:text="${container2}"></div>
+            <div class="bottom-left" th:text="'보관함에 적재된 영양제 : ' + ${container2SupplementCount} + '개'"></div>
+        </div>
+        <div class="rectangle" th:style="'background-color: ' + ${container3Color}">
+            <div th:text="${container3}"></div>
+            <div class="bottom-left" th:text="'보관함에 적재된 영양제 : ' + ${container3SupplementCount} + '개'"></div>
+        </div>
     </div>
-    <div class="option">
-        <p th:text="${option2Text}">보관함 6에 영양제 추가하는 버튼</p>
-        <form action="/scan" method="get"><input type="hidden" name="storage" value="6"> <!-- 보관함 정보를 hidden 필드로 설정 -->
-            <md-filled-icon-button type="submit">
-                <md-icon>add</md-icon>
-            </md-filled-icon-button>
-        </form>
->>>>>>> 7a88bb3af641395ca8e72c1bc0703399579d4b27
-    </div>
-    <div>
-        <p>이것은 <p th:text="${stockNum1}">번 보관함 재고량이다!<p th:text="${stock1}"></p></p>
-        <p>이것은 <p th:text="${stockNum2}">번 보관함 재고량이다!<p th:text="${stock2}"></p></p>
-        <p>이것은 <p th:text="${stockNum3}">번 보관함 재고량이다!<p th:text="${stock3}"></p></p>
-        <p>이것은 <p th:text="${stockNum4}">번 보관함 재고량이다!<p th:text="${stock4}"></p></p>
-        <p>이것은 <p th:text="${stockNum5}">번 보관함 재고량이다!<p th:text="${stock5}"></p></p>
-        <p>이것은 <p th:text="${stockNum6}">번 보관함 재고량이다!<p th:text="${stock6}"></p></p>
+
     </div>
 </div>
 </body>
