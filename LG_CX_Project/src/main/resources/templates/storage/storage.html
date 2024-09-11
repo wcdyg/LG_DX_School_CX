@@ -50,15 +50,20 @@
 <div class="dispenser-options">
     <div class="option">
         <p th:text="${option1Text}">보관함 5에 영양제 추가하는 버튼</p>
-        <md-filled-icon-button>
-            <md-icon>add</md-icon>
-        </md-filled-icon-button>
+        <form action="/scan" method="get"><input type="hidden" name="storage" value="5"> <!-- 보관함 정보를 hidden 필드로 설정 -->
+            <md-filled-icon-button type="submit">
+                <md-icon>add</md-icon>
+            </md-filled-icon-button>
+        </form>
+
     </div>
     <div class="option">
         <p th:text="${option2Text}">보관함 6에 영양제 추가하는 버튼</p>
-        <md-filled-icon-button>
-            <md-icon>add</md-icon>
-        </md-filled-icon-button>
+        <form action="/scan" method="get"><input type="hidden" name="storage" value="6"> <!-- 보관함 정보를 hidden 필드로 설정 -->
+            <md-filled-icon-button type="submit">
+                <md-icon>add</md-icon>
+            </md-filled-icon-button>
+        </form>
     </div>
     <div>
         <p>이것은 1번 보관함 재고량이다!</p>
