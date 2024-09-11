@@ -24,18 +24,4 @@ public class HomeViewController {
         return "/home";
     }
 
-    //  배너 선택시 (디스펜서) 저장소 정보 보기
-    @GetMapping("/storage/storage")
-    public String storage(HttpSession session , Model model) {
-        if(session.getAttribute("username") == null) {
-            return "/user/login";
-        }
-        model.addAttribute("headerText", "디스펜서 화면(영양제 등록 전)");
-        model.addAttribute("option1Text", "보관함 5에 영양제 추가하는 버튼");
-        model.addAttribute("option2Text", "보관함 6에 영양제 추가하는 버튼");
-
-        return "/storage/storage";
-    }
-
-
 }
