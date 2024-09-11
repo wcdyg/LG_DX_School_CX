@@ -22,6 +22,7 @@ public class Storage implements Serializable {
     private int stock;
 
     // Getter & Setter
+
     public String getStorageId() {
         return storageId;
     }
@@ -64,3 +65,5 @@ public class Storage implements Serializable {
                 '}';
     }
 }
+
+

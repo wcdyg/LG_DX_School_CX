@@ -50,8 +50,9 @@
 <h1>바코드 스캔 화면</h1>
 <div class="button-container">
     <form action="/supplements/add" method="get">
-        <span th:text="${container}"></span>
-        <md-filled-button type="submit">스캔하기</md-filled-button>
+      <input type="hidden" th:value="${storage}" name="storage">
+      <span th:text="${container}"></span>
+      <md-filled-button type="submit">스캔하기</md-filled-button>
     </form>
 </div>
 </body>
