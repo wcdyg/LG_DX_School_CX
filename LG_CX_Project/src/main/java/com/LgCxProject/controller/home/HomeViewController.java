@@ -43,6 +43,7 @@ public class HomeViewController {
         if(session.getAttribute("username") == null) {
             return "/user/login";
         }
+<<<<<<< HEAD
         String userId = (String) session.getAttribute("userId");
 
         List<Storage> storageInfoList = storageService.findAllStorage();
@@ -70,8 +71,25 @@ public class HomeViewController {
 //        if (!userStorageInfoList.isEmpty()){
 //        }
 
+=======
+        model.addAttribute("headerText","보관함 6번이다");
+        model.addAttribute("userId", session.getAttribute("userId"));
+
+        model.addAttribute("headerText", "디스펜서 화면(영양제 등록 전)");
+        model.addAttribute("option1Text", "보관함 5에 영양제 추가하는 버튼");
+        model.addAttribute("option2Text", "보관함 6에 영양제 추가하는 버튼");
+
+>>>>>>> 7a88bb3af641395ca8e72c1bc0703399579d4b27
         return "/storage/storage";
     }
+
+
+    @GetMapping("/scan")
+    public String scanpage() {
+
+        return "/supplements/scan";
+    }
+
 
 
 }

@@ -79,6 +79,10 @@
         <md-text-button>OK</md-text-button>
     </div>
 </div>
-<md-filled-button th:text="${buttonText}">섭취 시간 설정하기</md-filled-button>
+
+    <form action="/storage/newstorage" method="get">
+        <md-filled-button type="submit">섭취 시간 설정하기</md-filled-button>
+    </form>
+
 </body>
 </html>
