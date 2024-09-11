@@ -37,16 +37,4 @@ public class HomeViewController {
         return "/home";
     }
 
-    //  배너 선택시 (디스펜서) 저장소 정보 보기
-    @GetMapping("/storage/storage")
-    public String storage(HttpSession session , Model model) {
-        if(session.getAttribute("username") == null) {
-            return "/user/login";
-        }
-        return "/storage/storage";
-    }
-
-
-
-
 }
