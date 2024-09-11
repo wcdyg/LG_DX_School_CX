@@ -74,7 +74,6 @@ public class Supplements {
         this.medication_precautions = medication_precautions;
     }
 
-<<<<<<< HEAD
     public String getIntake_method() {
         return intake_method;
     }
@@ -83,8 +82,6 @@ public class Supplements {
         this.intake_method = intake_method;
     }
 
-=======
->>>>>>> 7a88bb3af641395ca8e72c1bc0703399579d4b27
     @Override
     public String toString() {
         return "Supplements{" +
@@ -95,10 +92,8 @@ public class Supplements {
                 ", intake_amount='" + intake_amount + '\'' +
                 ", intake_frequency='" + intake_frequency + '\'' +
                 ", medication_precautions='" + medication_precautions + '\'' +
-<<<<<<< HEAD
                 ", intake_method='" + intake_method + '\'' +
-=======
->>>>>>> 7a88bb3af641395ca8e72c1bc0703399579d4b27
+
                 '}';
     }
 }
