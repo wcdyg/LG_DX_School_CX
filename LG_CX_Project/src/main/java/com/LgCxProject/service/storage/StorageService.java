@@ -17,4 +17,6 @@ public class StorageService {
         return storageRepository.findAll();
     }
 
+    //Storage 화면 설정
+
 }

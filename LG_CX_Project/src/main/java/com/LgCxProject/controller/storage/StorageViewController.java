@@ -12,9 +12,8 @@ public class StorageViewController {
     //추가 버튼 누르면 바코드 스캔 화면으로 반환 - 보관함 번호를 가져와야 한다!
 
     // StorageView에서 보관함 추가 버튼을 누를 때, 보관함 번호를 전달받아 처리
-<<<<<<< HEAD
-=======
-    //  배너 선택시 (디스펜서) 저장소 정보 보기
+
+    //  배너 선택시 (디스펜서) 저장소 정보 보기ㄴ
     @GetMapping("/storage/storage")
     public String storage(HttpSession session , Model model) {
 
@@ -54,7 +53,6 @@ public class StorageViewController {
 
         return "/storage/storage";
     }
->>>>>>> 1a398f9e8afd171eb70eeeaefb764d53c3a61614
 
     @GetMapping("/scan")
     public String scanpage() {
