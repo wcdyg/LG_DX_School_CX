@@ -30,10 +30,6 @@ public class HomeViewController {
         model.addAttribute("username" , session.getAttribute("username"));
         model.addAttribute("userId", session.getAttribute("userId"));
 
-        //  기기 정보 보여주기?!
-//        List<Review> reviews = reviewService.findAllReviews();
-//        model.addAttribute("reviews", reviews);
-
         return "/home";
     }
 

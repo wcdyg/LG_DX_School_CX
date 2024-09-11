@@ -14,11 +14,6 @@ public class UserDataController {
     @Autowired
     UserService userService;
 
-//    @GetMapping("/checkUserId")
-//    public ResponseEntity<Boolean> checkUserId(@RequestParam(name = "userId") String userId) {
-//        boolean exists = userService.isUserAlreadyExists(userId);
-//        return ResponseEntity.ok(exists);  // true 또는 false 반환
-
     @GetMapping("/checkUserId")
     public boolean isUserAlreadyExist(@RequestParam(name = "userId") String userId) {
         System.out.println("[아이디 중복검사] 입력받은 아이디 : " + userId);

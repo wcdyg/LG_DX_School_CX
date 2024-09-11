@@ -12,40 +12,45 @@ import java.time.LocalDate;
 public class Dispenser {
 
     @Id
-    private String product_id;
-    private LocalDate manufacture_date;
-    private String manufacture_company;
+    @Column(name = "product_id")
+    private String productId;
 
-    public String getProduct_id() {
-        return product_id;
+    @Column(name = "manufacture_date")
+    private LocalDate manufactureDate;
+
+    @Column(name = "manufacture_company")
+    private LocalDate manufactureCompany;
+
+    public String getProductId() {
+        return productId;
     }
 
-    public void setProduct_id(String product_id) {
-        this.product_id = product_id;
+    public void setProductId(String productId) {
+        this.productId = productId;
     }
 
-    public LocalDate getManufacture_date() {
-        return manufacture_date;
+    public LocalDate getManufactureDate() {
+        return manufactureDate;
     }
 
-    public void setManufacture_date(LocalDate manufacture_date) {
-        this.manufacture_date = manufacture_date;
+    public void setManufactureDate(LocalDate manufactureDate) {
+        this.manufactureDate = manufactureDate;
     }
 
-    public String getManufacture_company() {
-        return manufacture_company;
+    public LocalDate getManufactureCompany() {
+        return manufactureCompany;
     }
 
-    public void setManufacture_company(String manufacture_company) {
-        this.manufacture_company = manufacture_company;
+    public void setManufactureCompany(LocalDate manufactureCompany) {
+        this.manufactureCompany = manufactureCompany;
     }
 
     @Override
     public String toString() {
         return "Dispenser{" +
-                "product_id='" + product_id + '\'' +
-                ", manufacture_date=" + manufacture_date +
-                ", manufacture_company='" + manufacture_company + '\'' +
+                "productId='" + productId + '\'' +
+                ", manufactureDate=" + manufactureDate +
+                ", manufactureCompany=" + manufactureCompany +
                 '}';
     }
 }

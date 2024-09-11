@@ -4,19 +4,48 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import oracle.sql.DATE;
+
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "tb_mydata")
 public class Mydata {
     @Id
-    private String medical_treatment_id;
+    @Column(name = "medical_treatment_id")
+    private String medicalTreatmentId;
+
     @Id
-    private String drug_name;
+    @Column(name = "drug_name")
+    private String drugName;
+
     @Column(name = "user_id")
     private String userId;
-    private int medical_treatment_date;
-    private String diagnosis_name;
-    private String drug_ingredient;
+
+    @Column(name = "medical_treatment_date")
+    private LocalDate medicalTreatmentDate;
+
+    @Column(name = "diagnosis_name")
+    private String diagnosisName;
+
+    @Column(name = "drug_ingredient")
+    private String drugIngredient;
+
+    public String getMedicalTreatmentId() {
+        return medicalTreatmentId;
+    }
+
+    public void setMedicalTreatmentId(String medicalTreatmentId) {
+        this.medicalTreatmentId = medicalTreatmentId;
+    }
+
+    public String getDrugName() {
+        return drugName;
+    }
+
+    public void setDrugName(String drugName) {
+        this.drugName = drugName;
+    }
 
     public String getUserId() {
         return userId;
@@ -26,55 +55,39 @@ public class Mydata {
         this.userId = userId;
     }
 
-    public String getMedical_treatment_id() {
-        return medical_treatment_id;
+    public LocalDate getMedicalTreatmentDate() {
+        return medicalTreatmentDate;
     }
 
-    public void setMedical_treatment_id(String medical_treatment_id) {
-        this.medical_treatment_id = medical_treatment_id;
+    public void setMedicalTreatmentDate(LocalDate medicalTreatmentDate) {
+        this.medicalTreatmentDate = medicalTreatmentDate;
     }
 
-    public String getDrug_name() {
-        return drug_name;
+    public String getDiagnosisName() {
+        return diagnosisName;
     }
 
-    public void setDrug_name(String drug_name) {
-        this.drug_name = drug_name;
+    public void setDiagnosisName(String diagnosisName) {
+        this.diagnosisName = diagnosisName;
     }
 
-    public int getMedical_treatment_date() {
-        return medical_treatment_date;
+    public String getDrugIngredient() {
+        return drugIngredient;
     }
 
-    public void setMedical_treatment_date(int medical_treatment_date) {
-        this.medical_treatment_date = medical_treatment_date;
-    }
-
-    public String getDiagnosis_name() {
-        return diagnosis_name;
-    }
-
-    public void setDiagnosis_name(String diagnosis_name) {
-        this.diagnosis_name = diagnosis_name;
-    }
-
-    public String getDrug_ingredient() {
-        return drug_ingredient;
-    }
-
-    public void setDrug_ingredient(String drug_ingredient) {
-        this.drug_ingredient = drug_ingredient;
+    public void setDrugIngredient(String drugIngredient) {
+        this.drugIngredient = drugIngredient;
     }
 
     @Override
     public String toString() {
-        return "Mydate{" +
-                "userId='" + userId + '\'' +
-                ", medical_treatment_id='" + medical_treatment_id + '\'' +
-                ", drug_name='" + drug_name + '\'' +
-                ", medical_treatment_date=" + medical_treatment_date +
-                ", diagnosis_name='" + diagnosis_name + '\'' +
-                ", drug_ingredient='" + drug_ingredient + '\'' +
+        return "Mydata{" +
+                "medicalTreatmentId='" + medicalTreatmentId + '\'' +
+                ", drugName='" + drugName + '\'' +
+                ", userId='" + userId + '\'' +
+                ", medicalTreatmentDate=" + medicalTreatmentDate +
+                ", diagnosisName='" + diagnosisName + '\'' +
+                ", drugIngredient='" + drugIngredient + '\'' +
                 '}';
     }
 }
