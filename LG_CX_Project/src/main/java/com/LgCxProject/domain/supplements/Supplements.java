@@ -16,6 +16,7 @@ public class Supplements {
     private String intake_amount;
     private String intake_frequency;
     private String medication_precautions;
+    private String intake_method;
 
     public String getSupplement_id() {
         return supplement_id;
@@ -73,6 +74,17 @@ public class Supplements {
         this.medication_precautions = medication_precautions;
     }
 
+<<<<<<< HEAD
+    public String getIntake_method() {
+        return intake_method;
+    }
+
+    public void setIntake_method(String intake_method) {
+        this.intake_method = intake_method;
+    }
+
+=======
+>>>>>>> 7a88bb3af641395ca8e72c1bc0703399579d4b27
     @Override
     public String toString() {
         return "Supplements{" +
@@ -83,6 +95,10 @@ public class Supplements {
                 ", intake_amount='" + intake_amount + '\'' +
                 ", intake_frequency='" + intake_frequency + '\'' +
                 ", medication_precautions='" + medication_precautions + '\'' +
+<<<<<<< HEAD
+                ", intake_method='" + intake_method + '\'' +
+=======
+>>>>>>> 7a88bb3af641395ca8e72c1bc0703399579d4b27
                 '}';
     }
 }

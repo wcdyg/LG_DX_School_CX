@@ -49,6 +49,18 @@
 <h1 th:text="${headerText}">디스펜서 화면(영양제 등록 전)</h1>
 <div class="dispenser-options">
     <div class="option">
+<<<<<<< HEAD
+        <p>보관함 <p th:text="${optionText1}"><color = th:text{ $blue/p></p>
+        <md-filled-icon-button>
+            <md-icon>add</md-icon>
+        </md-filled-icon-button>
+    </div>
+    <div class="option">
+        <p>보관함 <p th:text="${optionText2}"></p>에 영양제 추가하는 버튼</p>
+        <md-filled-icon-button>
+            <md-icon>add</md-icon>
+        </md-filled-icon-button>
+=======
         <p th:text="${option1Text}">보관함 5에 영양제 추가하는 버튼</p>
         <form action="/scan" method="get"><input type="hidden" name="storage" value="5"> <!-- 보관함 정보를 hidden 필드로 설정 -->
             <md-filled-icon-button type="submit">
@@ -64,9 +76,15 @@
                 <md-icon>add</md-icon>
             </md-filled-icon-button>
         </form>
+>>>>>>> 7a88bb3af641395ca8e72c1bc0703399579d4b27
     </div>
     <div>
-        <p>이것은 1번 보관함 재고량이다!</p>
+        <p>이것은 <p th:text="${stockNum1}">번 보관함 재고량이다!<p th:text="${stock1}"></p></p>
+        <p>이것은 <p th:text="${stockNum2}">번 보관함 재고량이다!<p th:text="${stock2}"></p></p>
+        <p>이것은 <p th:text="${stockNum3}">번 보관함 재고량이다!<p th:text="${stock3}"></p></p>
+        <p>이것은 <p th:text="${stockNum4}">번 보관함 재고량이다!<p th:text="${stock4}"></p></p>
+        <p>이것은 <p th:text="${stockNum5}">번 보관함 재고량이다!<p th:text="${stock5}"></p></p>
+        <p>이것은 <p th:text="${stockNum6}">번 보관함 재고량이다!<p th:text="${stock6}"></p></p>
     </div>
 </div>
 </body>
