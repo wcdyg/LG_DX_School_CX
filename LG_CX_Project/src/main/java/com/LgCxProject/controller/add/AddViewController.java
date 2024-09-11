@@ -8,7 +8,6 @@ public class AddViewController {
 
     @GetMapping("/storage/newstorage")
     public String newstoragepage() {
-
         return "/storage/newstorage";
     }
 
