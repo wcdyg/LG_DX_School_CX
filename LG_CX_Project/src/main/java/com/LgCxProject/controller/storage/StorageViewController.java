@@ -9,6 +9,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class StorageViewController {
 
+<<<<<<< HEAD
+    //추가 버튼 누르면 바코드 스캔 화면으로 반환 - 보관함 번호를 가져와야 한다!
+
+=======
     // StorageView에서 보관함 추가 버튼을 누를 때, 보관함 번호를 전달받아 처리
     //  배너 선택시 (디스펜서) 저장소 정보 보기
     @GetMapping("/storage/storage")
@@ -60,6 +64,7 @@ public class StorageViewController {
     public String addpage() {
         return "/supplements/add";
     }
+>>>>>>> 7a88bb3af641395ca8e72c1bc0703399579d4b27
 
     @GetMapping("/supplements/scan")
     public String addscanpage(@RequestParam("container") int container, Model model) {
