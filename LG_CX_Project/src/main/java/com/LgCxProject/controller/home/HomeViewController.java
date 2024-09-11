@@ -32,4 +32,15 @@ public class HomeViewController {
 
         return "/home";
     }
+<<<<<<< HEAD
+=======
+
+    @GetMapping("/scan")
+    public String scanpage() {
+
+        return "/supplements/scan";
+    }
+
+
+>>>>>>> 1a398f9e8afd171eb70eeeaefb764d53c3a61614
 }
