@@ -68,7 +68,7 @@
             background-color: #007bff;
             color: white;
             border: none;
-            border-radius: 4px;
+            border-radius: 20px;
             padding: 4px 12px;
             font-size: 14px;
             font-weight: bold;
@@ -76,31 +76,6 @@
         }
     </style>
 </head>
-<<<<<<< HEAD
-<body>
-<h1 th:text="${headerText}">디스펜서 화면(영양제 등록 전)</h1>
-<div class="dispenser-options">
-    <div class="option">
-        <p>보관함 <p th:text="${storageId}"><color = th:text{ $blue/p></p>
-        <md-filled-icon-button>
-            <md-icon>add</md-icon>
-        </md-filled-icon-button>
-    </div>
-    <div class="option">
-        <p>보관함 <p th:text="${optionText2}"></p>에 영양제 추가하는 버튼</p>
-        <md-filled-icon-button>
-            <md-icon>add</md-icon>
-        </md-filled-icon-button>
-=======
-        <p th:text="${option1Text}">보관함 5에 영양제 추가하는 버튼</p>
-        <form action="/scan" method="get"><input type="hidden" name="storage" value="5"> <!-- 보관함 정보를 hidden 필드로 설정 -->
-            <md-filled-icon-button type="submit">
-                <md-icon>add</md-icon>
-            </md-filled-icon-button>
-        </form>
-=======
->>>>>>> 1a398f9e8afd171eb70eeeaefb764d53c3a61614
-
 
 <body>
 <div class="container">
@@ -118,8 +93,31 @@
             <div class="bottom-left" th:text="'보관함에 적재된 영양제 : ' + ${container3SupplementCount} + '개'"></div>
         </div>
     </div>
-
+    <div class="row">
+        <div class="rectangle" th:style="'background-color: ' + ${container4Color}">
+            <div th:text="${container4}"></div>
+            <div class="bottom-left" th:text="'보관함에 적재된 영양제 : ' + ${container4SupplementCount} + '개'"></div>
+        </div>
+        <div class="rectangle" th:style="'background-color: ' + ${container5Color}">
+            <div>
+                <span th:text="'보관함' + ${container5Number}"></span>
+            </div>
+            <form action="/supplements/scan" method="get">
+                <input type="hidden" name="container" th:value="${container5Number}">
+                <button type="submit" class="md-filled-button">등록/추가하기</button>
+            </form>
+        </div>
+        <div class="rectangle" th:style="'background-color: ' + ${container6Color}">
+            <div>
+                <span th:text="'보관함' + ${container6Number}"></span>
+            </div>
+            <form action="/supplements/scan" method="get">
+                <input type="hidden" name="container" th:value="${container6Number}">
+                <button type="submit" class="md-filled-button">등록/추가하기</button>
+            </form>
+        </div>
     </div>
 </div>
 </body>
 </html>
+ 
