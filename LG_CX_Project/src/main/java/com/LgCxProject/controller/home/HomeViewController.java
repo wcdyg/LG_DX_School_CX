@@ -41,12 +41,6 @@ public class HomeViewController {
     }
 
 
-    @GetMapping("/scan")
-    public String scanpage() {
-
-        return "/supplements/scan";
-    }
-
 
 
 }
