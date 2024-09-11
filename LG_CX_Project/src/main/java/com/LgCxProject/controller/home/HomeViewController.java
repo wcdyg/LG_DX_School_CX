@@ -30,12 +30,20 @@ public class HomeViewController {
         if(session.getAttribute("username") == null) {
             return "/user/login";
         }
-        model.addAttribute("username" , session.getAttribute("username"));
+        model.addAttribute("headerText","보관함 6번이다");
         model.addAttribute("userId", session.getAttribute("userId"));
 
 
-        return "/home";
+        return "/storage/storage";
     }
+
+
+    @GetMapping("/scan")
+    public String scanpage() {
+
+        return "/supplements/scan";
+    }
+
 
 
 }
