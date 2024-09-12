@@ -3,7 +3,7 @@ package com.LgCxProject;
 import com.LgCxProject.domain.storage.UserStorageInfo;
 import com.LgCxProject.domain.user.User;
 import com.LgCxProject.dto.domain.StorageUserStorageInfoDTO;
-import com.LgCxProject.dto.service.ObjetToDTO;
+import com.LgCxProject.dto.service.StorageUserStorageInfoObjetToDTO;
 import com.LgCxProject.repository.storage.UserStorageRepository;
 import com.LgCxProject.repository.user.UserRepository;
 import com.LgCxProject.service.storage.UserStorageService;
@@ -12,11 +12,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.math.BigDecimal;
-import java.sql.Timestamp;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,7 +19,7 @@ import java.util.Optional;
 public class JoinTest {
 
     @Autowired
-    ObjetToDTO objetToDTO;
+    StorageUserStorageInfoObjetToDTO objetToDTO;
 
     @Autowired
     UserStorageService userStorageService;

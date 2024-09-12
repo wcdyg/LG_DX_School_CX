@@ -6,12 +6,24 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface UserStorageRepository extends JpaRepository<UserStorageInfo, String> {
 
-    // 특정 userId로 userStorage 찾기
+    // 특정 userId로 userStorage 전체 찾기
     @Query(value = "select * from tb_user_storage_info where user_id =:userId", nativeQuery = true)
     List<UserStorageInfo> findStorageByUserId(@Param("userId") String userId);
+
+    // 특정 storageId로 userStorage 전체 찾기
+    @Query(value = "select * from tb_user_storage_info where storage_id =:storageId", nativeQuery = true)
+    List<UserStorageInfo> findUserStorageByStorageId(@Param("storageId") String storageId);
+
+    // 특정 storageId로 userId 찾기
+    @Query(value = "SELECT USER_ID FROM TB_USER_STORAGE_INFO WHERE STORAGE_ID =:storageId", nativeQuery = true)
+    List<String> findUserIdByStorageId(@Param("storageId") String storageId);
+
+
+
 
     // TB_STORAGE 와  TB_USER_STORAGE_INFO 를 JOIN
     // = TB_STORAGE(보관함 마다)의 STOCK

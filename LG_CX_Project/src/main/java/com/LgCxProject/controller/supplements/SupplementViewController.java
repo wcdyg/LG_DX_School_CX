@@ -17,13 +17,6 @@ public class SupplementViewController {
     @Autowired
     private SupplementService supplementService;
 
-    // 컨테이너 값을 세션에 저장
-    @PostMapping("/supplements/scan")
-    public String scan(@RequestParam("container") int container, HttpSession session) {
-        session.setAttribute("container", container); // 세션에 container 값 저장
-        return "/supplements/scan"; // 다음 페이지로 이동
-    }
-
     // 영양제명을 입력받아 DB에서 조회 후 add 페이지로 이동
     @PostMapping("/supplements/add")
     public String getSupplementInfo(@RequestParam("supplementName") String supplementName, Model model) {

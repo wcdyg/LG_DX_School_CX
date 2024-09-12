@@ -11,14 +11,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class ObjetToDTO {
+public class StorageUserStorageInfoObjetToDTO {
 
     @Autowired
     UserStorageRepository userStorageRepository;
-
-
     // convertToDTO
-    public static List<StorageUserStorageInfoDTO> convertToDTO(List<Object[]> results) {
+    public static List<StorageUserStorageInfoDTO> convertStorageUserStorageInfoToDTO(List<Object[]> results) {
         List<StorageUserStorageInfoDTO> dtoList = new ArrayList<>();
 
         for (Object[] result : results) {
@@ -44,15 +42,14 @@ public class ObjetToDTO {
     // storageId로 조인한 테이블에서
     public List<StorageUserStorageInfoDTO> getStorageUserStorageInfoByStorageId(String storageId) {
         List<Object[]> results = userStorageRepository.StorageJoinUserStorageByStorageId(storageId);
-        List<StorageUserStorageInfoDTO> dtoList = convertToDTO(results);
+        List<StorageUserStorageInfoDTO> dtoList = convertStorageUserStorageInfoToDTO(results);
         return dtoList;
     }
 
     public List<StorageUserStorageInfoDTO> getStorageUserStorageInfoByUserId(String userId) {
         List<Object[]> results = userStorageRepository.StorageJoinUserStorageByUserId(userId);
-        List<StorageUserStorageInfoDTO> dtoList = convertToDTO(results);
+        List<StorageUserStorageInfoDTO> dtoList = convertStorageUserStorageInfoToDTO(results);
         return dtoList;
     }
-
 
 }
