@@ -50,13 +50,12 @@ public class StorageViewController {
         model.addAttribute("container5Number", "5");
         model.addAttribute("container6Number", "6");
 
-
         // 보관함 사용자 이름 모델에 추가
 //        model.addAttribute("container1username", "김수연");
-//        HashMap<String, List<String>> containerUserName= storageService.containerUserName();
-//        for(String key: containerUserName.keySet()){
-//            model.addAttribute(key,String.join("<br>",containerUserName.get(key)));
-//        }
+        HashMap<String, List<String>> containerUserName= storageService.containerUserName();
+        for(String key: containerUserName.keySet()){
+            model.addAttribute(key,String.join("<br>",containerUserName.get(key)));
+        }
 
         // 보관함 별 재고 가져오기
 //        model.addAttribute("container1SupplementCount", "27");
@@ -85,13 +84,6 @@ public class StorageViewController {
             model.addAttribute(key,containerColor.get(key));
         }
 
-<<<<<<< HEAD
-        model.addAttribute("container5Number", "5");
-        model.addAttribute("container6Number", "6");
-
-
-=======
->>>>>>> a56f93b4812578412aec559a368f7c81a9a61cb6
         return "/storage/storage";
     }
 

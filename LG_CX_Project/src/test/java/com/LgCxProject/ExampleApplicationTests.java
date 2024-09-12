@@ -8,10 +8,13 @@ import com.LgCxProject.repository.storage.StorageRepository;
 import com.LgCxProject.repository.storage.UserStorageRepository;
 import com.LgCxProject.repository.user.UserRepository;
 import com.LgCxProject.service.storage.StorageService;
+import com.LgCxProject.service.supplements.SupplementService;
+import jakarta.servlet.http.HttpSession;
 import jdk.swing.interop.SwingInterOpUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,6 +29,8 @@ class ExampleApplicationTests {
 	UserStorageRepository userStorageRepository;
 	@Autowired
 	UserRepository userRepository;
+	@Autowired
+	SupplementService supplementService;
 
 	@Autowired
 	StorageSupplementInfoObjectToDTO storageSupplementInfoObjectToDTO;
@@ -54,19 +59,10 @@ class ExampleApplicationTests {
 
 
 	@Test
-	void contextLoads() {
-
-		HashMap<String, List<String>> containerUserName= storageService.containerUserName();
-
-		List<String> userIdList = userStorageRepository.findUserIdByStorageId("STRG001");
-		System.out.println(userIdList.size());
-		System.out.println(String.join("<br>",userIdList));
-//		for(String key: containerUserName.keySet()){
-//			System.out.println(key);
-//			System.out.println(String.join("<br>",containerUserName.get(key)));
-//		}
-
-
+	void contextLoads(@RequestParam("container") int container, HttpSession session) {
+		String storageId = (String) session.getAttribute("container");
+		System.out.println(storageId);
+		System.out.println(supplementService.generateNextInfoNum("STRG001"));
 
 	}
 

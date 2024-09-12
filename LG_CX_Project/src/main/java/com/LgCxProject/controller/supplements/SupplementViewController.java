@@ -1,11 +1,14 @@
 package com.LgCxProject.controller.supplements;
+import com.LgCxProject.domain.storage.UserStorageInfo;
 import com.LgCxProject.domain.supplements.Supplements;
+import com.LgCxProject.repository.storage.UserStorageRepository;
 import com.LgCxProject.service.supplements.SupplementService;
 import org.springframework.ui.Model;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -13,15 +16,20 @@ import java.util.Optional;
 
 @Controller
 public class SupplementViewController {
+    @Autowired
+    UserStorageRepository userStorageRepository;
 
     @Autowired
     private SupplementService supplementService;
 
     // 영양제명을 입력받아 DB에서 조회 후 add 페이지로 이동
     @PostMapping("/supplements/add")
-    public String getSupplementInfo(@RequestParam("supplementName") String supplementName, Model model) {
+    public String getSupplementInfo(@RequestParam("supplementName") String supplementName, Model model,
+                                    HttpSession session) {
         // 입력받은 영양제명으로 DB에서 영양제 데이터를 조회
         Optional<Supplements> supplements = supplementService.FindSupplement(supplementName);
+        session.setAttribute("supplementId",supplements.get().getSupplementId());
+        session.setAttribute("suppleOutAmount",supplements.get().getIntakeAmount());
 
         if (supplements.isPresent()) {
             // 조회된 데이터를 모델에 추가
@@ -39,5 +47,12 @@ public class SupplementViewController {
 
         // add.html 페이지로 이동
         return "/supplements/add";
+    }
+
+    // newStorage 화면으로 넘어감
+    @PostMapping("/storage/newstorage")
+    public String newstoragepage(@ModelAttribute UserStorageInfo userStorageInfo) {
+        userStorageRepository.save(userStorageInfo);
+        return "/storage/storage";
     }
 }

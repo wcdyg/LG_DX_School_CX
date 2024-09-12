@@ -11,6 +11,8 @@ public interface SupplementRepository extends JpaRepository<Supplements, Long> {
     // 영양제명을 기준으로 데이터를 조회
     Optional<Supplements> findBySupplementName(String supplementName);
 
+    // 가장 최근 등록된
+
 }
 
 

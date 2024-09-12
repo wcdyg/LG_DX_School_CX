@@ -25,12 +25,12 @@ public class StorageService {
     @Autowired
     StorageSupplementInfoObjectToDTO storageSupplementInfoObjectToDTO;
 
-//    전체 storage 조회
+    // 전체 storage 조회
     public List<Storage> findAllStorage() {
         return storageRepository.findAll();
     }
 
-    // 보관함 별 사용자 이름 리스트
+    //보관함 별 사용자 이름 리스트
     public HashMap<String, List<String>> containerUserName() {
         HashMap<String, List<String>> containerUserName = new HashMap<>();
         List<Storage> storages = storageRepository.findAll();
@@ -62,7 +62,7 @@ public class StorageService {
         return containerSupplementCount;
     }
 
-    // 보관함 별 영양제 용량 가져오기
+    //보관함 별 영양제 용량 가져오기
     public HashMap<String, Integer> containerSupplementCapacity() {
         List<Storage> storages = storageRepository.findAll();
         HashMap<String, Integer> containerSupplementCapacity = new HashMap<>();
@@ -75,7 +75,6 @@ public class StorageService {
         }
         return containerSupplementCapacity;
     }
-
 
     //보관함 별 영양제 정보 가져오기
     public HashMap<String, String> containerSupplementName(){
@@ -91,7 +90,7 @@ public class StorageService {
         return containerSupplementName;
     }
 
-    // 사용자 ID와 보관함 번호에 따라 색상을 결정하는 메서드
+    //사용자 ID와 보관함 번호에 따라 색상을 결정하는 메서드
     public HashMap<String ,String> containerColor(String userId) {
         HashMap<String ,String> containerColor = new HashMap<>();
         // 모든 보관함에 기본 색상 적용

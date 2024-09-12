@@ -7,6 +7,7 @@ import jakarta.persistence.Table;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.Date;
 
 @Entity
 @Table(name = "tb_user_storage_info")
@@ -31,7 +32,7 @@ public class UserStorageInfo {
     private int suppleOutAmount;
 
     @Column(name = "intake_time") // 'intake_time' 열과 매핑
-    private LocalTime intakeTime;
+    private Date intakeTime;
 
     @Column(name = "regist_time") // 'regist_time' 열과 매핑
     private LocalDateTime registTime;
@@ -85,11 +86,11 @@ public class UserStorageInfo {
         this.suppleOutAmount = suppleOutAmount;
     }
 
-    public LocalTime getIntakeTime() {
+    public Date getIntakeTime() {
         return intakeTime;
     }
 
-    public void setIntakeTime(LocalTime intakeTime) {
+    public void setIntakeTime(Date intakeTime) {
         this.intakeTime = intakeTime;
     }
 

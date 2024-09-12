@@ -22,8 +22,9 @@ public interface UserStorageRepository extends JpaRepository<UserStorageInfo, St
     @Query(value = "SELECT USER_ID FROM TB_USER_STORAGE_INFO WHERE STORAGE_ID =:storageId", nativeQuery = true)
     List<String> findUserIdByStorageId(@Param("storageId") String storageId);
 
-
-
+    // 가장 최근 등록된 userStorage info_num 불러오기, product_id도 불러오기
+    @Query(value = "SELECT * FROM (SELECT * FROM TB_USER_STORAGE_INFO ORDER BY info_num DESC) WHERE ROWNUM = 1", nativeQuery = true)
+    UserStorageInfo findRecentInfoNum();
 
     // TB_STORAGE 와  TB_USER_STORAGE_INFO 를 JOIN
     // = TB_STORAGE(보관함 마다)의 STOCK
@@ -35,7 +36,6 @@ public interface UserStorageRepository extends JpaRepository<UserStorageInfo, St
             " ON A.STORAGE_ID = B.STORAGE_ID " +
             " WHERE B.STORAGE_ID =:storageId " , nativeQuery = true)
     List<Object[]> StorageJoinUserStorageByStorageId(@Param("storageId") String storageId);
-
 
     @Query(value = "SELECT A.*,B.INFO_NUM, B.USER_ID,B.SUPPLE_OUT_AMOUNT,B.INTAKE_TIME,B.REGIST_TIME" +
             "  FROM TB_STORAGE A , TB_USER_STORAGE_INFO B WHERE A.STORAGE_ID = B.STORAGE_ID AND B.USER_ID =:userId" , nativeQuery = true)

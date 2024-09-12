@@ -88,8 +88,6 @@
         .myDB-supplement-info div {
             margin-bottom: 10px;
         }
-
-
     </style>
 </head>
 <body>
@@ -123,16 +121,18 @@
         <span>Hour</span>
         <span>Minute</span>
     </div>
-    <div class="time-inputs">
-        <input type="text" id="hour-input" name="hour" placeholder="00" maxlength="2">
-        <input type="text" id="minute-input" name="minute" placeholder="00" maxlength="2">
+    <div class="time-actions">
+        <md-text-button id="reset-button">Reset</md-text-button>
+        <form action="/saveIntakeTime" method="post">
+            <input type="text" id="hour-input" name="hour" th:value="${hour}" placeholder="00" maxlength="2">
+            <input type="text" id="minute-input" name="minute" th:value="${minute}" placeholder="00" maxlength="2">
+            <md-filled-button type="submit">Set</md-filled-button>
+        </form>
     </div>
 
-    <div class="time-actions">
-        <md-text-button id="reset-button">Cancel</md-text-button>
-        <form action="/storage/newstorage" method="post">
-            <md-filled-button type="submit">Ok</md-filled-button>
-        </form>
+    <div class="storage-actions">
+        <button id="cancel-button" type="button">취소</button>
+        <button id="confirm-button" type="button">확인</button>
     </div>
 </div>
 
@@ -144,20 +144,62 @@
         hourInput.value = '';
         minuteInput.value = '';
     });
-
-    document.querySelector('form').addEventListener('submit', (e) => {
-        const hour = hourInput.value.padStart(2, '0');
-        const minute = minuteInput.value.padStart(2, '0');
-        const supplement_setting_time = `${hour}:${minute}`;
-
-        const input = document.createElement('input');
-        input.type = 'hidden';
-        input.name = 'supplement_setting_time';
-        input.value = supplement_setting_time;
-        e.target.appendChild(input);
-    });
-
 </script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('form').on('submit', function(e) {
+            e.preventDefault(); // 폼의 기본 제출 동작을 방지합니다.
 
+            const hour = $('#hour-input').val();
+            const minute = $('#minute-input').val();
+
+            $.ajax({
+                url: '/saveIntakeTime',
+                type: 'POST',
+                data: {
+                    hour: hour,
+                    minute: minute
+                },
+                success: function(response) {
+                    alert('시간 설정이 완료되었습니다!');
+                },
+                error: function(xhr, status, error) {
+                    alert('시간 설정에 실패했습니다: ' + xhr.responseText);
+                }
+            });
+        });
+    });
+</script>
+<script>
+    $(document).ready(function() {
+        // 기존 Set 버튼 관련 코드 유지
+
+        // 취소 버튼 클릭 이벤트
+        $('#cancel-button').click(function() {
+            window.location.href = '/storage/storage';
+        });
+
+        // 확인 버튼 클릭 이벤트
+        $('#confirm-button').click(function() {
+            $.ajax({
+                url: '/saveUserStorage',
+                type: 'POST',
+                data: {
+                    // 필요한 데이터가 있다면 여기에 추가
+                },
+                success: function(response) {
+                    // 성공 시 처리
+                    alert('영양제 등록이 완료되었습니다.');
+                    window.location.href = '/storage/storage'; // 등록 후 이동할 페이지
+                },
+                error: function(xhr, status, error) {
+                    // 오류 시 처리
+                    alert('영양제 등록에 실패했습니다: ' + xhr.responseText);
+                }
+            });
+        });
+    });
+</script>
 </body>
 </html>
