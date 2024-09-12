@@ -1,12 +1,13 @@
 package com.LgCxProject.repository.supplements;
-
-import com.LgCxProject.domain.user.User;
+import com.LgCxProject.domain.supplements.Supplements;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
-
+import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
-public interface SupplementRepository extends JpaRepository<User, String> {
+
+@Repository
+public interface SupplementRepository extends JpaRepository<Supplements, Long> {
+    // 영양제명을 기준으로 데이터를 조회
+    Optional<Supplements> findBySupplementName(String supplementName);
 
 }

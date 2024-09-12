@@ -13,11 +13,11 @@ public class StorageViewController {
 
     // StorageView에서 보관함 추가 버튼을 누를 때, 보관함 번호를 전달받아 처리
 
-<<<<<<< HEAD
+
     //  배너 선택시 (디스펜서) 저장소 정보 보기ㄴ
-=======
+
     //  배너 선택시 (디스펜서) 저장소 정보 보기
->>>>>>> 80eb447d423db1561d812eb0605f21e139ee3a2e
+
     @GetMapping("/storage/storage")
     public String storage(HttpSession session , Model model) {
 
@@ -57,25 +57,9 @@ public class StorageViewController {
 
         return "/storage/storage";
     }
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 80eb447d423db1561d812eb0605f21e139ee3a2e
 
     @GetMapping("/scan")
     public String scanpage() {
-        return "/supplements/scan";
-    }
-
-    @GetMapping("/supplements/add")
-    public String addpage() {
-        return "/supplements/add";
-    }
-
-    @GetMapping("/supplements/scan")
-    public String addscanpage(@RequestParam("container") int container, Model model) {
-        model.addAttribute("container", container);
         return "/supplements/scan";
     }
 
