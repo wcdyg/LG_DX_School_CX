@@ -59,9 +59,6 @@ public class StorageViewController {
             model.addAttribute(key,containerSupplementCapacity.get(key).toString());
         }
 
-
-
-
         // 보관함 별 영양제 이름 가져오기
 //        model.addAttribute("container1", "");
         HashMap<String ,String> containerSupplementName = storageService.containerSupplementName();
@@ -69,18 +66,11 @@ public class StorageViewController {
             model.addAttribute(key,containerSupplementName.get(key));
         }
 
-
-
         // 보관함 별 색상 설정하기
         HashMap<String ,String> containerColor = storageService.containerColor(userId);
         for(String key: containerColor.keySet()){
             model.addAttribute(key,containerColor.get(key));
         }
-
-
-        model.addAttribute("container5Number", "5");
-        model.addAttribute("container6Number", "6");
-
 
         return "/storage/storage";
     }
