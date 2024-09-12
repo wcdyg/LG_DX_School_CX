@@ -1,5 +1,4 @@
 package com.LgCxProject.service.storage;
-
 import com.LgCxProject.domain.storage.Storage;
 import com.LgCxProject.domain.storage.UserStorageInfo;
 import com.LgCxProject.domain.supplements.Supplements;
@@ -26,7 +25,7 @@ public class StorageService {
     @Autowired
     StorageSupplementInfoObjectToDTO storageSupplementInfoObjectToDTO;
 
-    //전체 storage 조회
+//    전체 storage 조회
     public List<Storage> findAllStorage() {
         return storageRepository.findAll();
     }
@@ -116,18 +115,6 @@ public class StorageService {
         }
         return containerColor;
     }
-
-    String determineColorForUser(String userId, int containerNumber) {
-        switch (userId) {
-            case "user1":
-                return containerNumber % 2 == 0 ? "#ff0000" : "#00ff00"; // 빨강, 초록
-            case "user2":
-                return containerNumber % 2 == 0 ? "#0000ff" : "#ffff00"; // 파랑, 노랑
-            default:
-                return "#b09fbf"; // 기본 색상
-        }
-    }
-
 
 
 }

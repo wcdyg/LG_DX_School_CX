@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
@@ -41,19 +42,31 @@ public class StorageViewController {
         Optional<User> user = userRepository.findByUserId(userId);
         model.addAttribute("username",user.get().getName());
 
+        // 다음 페이지로 넘기는 숫자
+        model.addAttribute("container1Number", "1");
+        model.addAttribute("container2Number", "2");
+        model.addAttribute("container3Number", "3");
+        model.addAttribute("container4Number", "4");
+        model.addAttribute("container5Number", "5");
+        model.addAttribute("container6Number", "6");
+
+
         // 보관함 사용자 이름 모델에 추가
-        HashMap<String, List<String>> containerUserName= storageService.containerUserName();
-        for(String key: containerUserName.keySet()){
-            model.addAttribute(key,String.join("<br>",containerUserName.get(key)));
-        }
+//        model.addAttribute("container1username", "김수연");
+//        HashMap<String, List<String>> containerUserName= storageService.containerUserName();
+//        for(String key: containerUserName.keySet()){
+//            model.addAttribute(key,String.join("<br>",containerUserName.get(key)));
+//        }
 
         // 보관함 별 재고 가져오기
+//        model.addAttribute("container1SupplementCount", "27");
         HashMap<String ,Integer> containerSupplementCount = storageService.containerSupplementCount();
         for(String key: containerSupplementCount.keySet()){
             model.addAttribute(key,containerSupplementCount.get(key).toString());
         }
 
         // 보관함 별 영양제 용량 가져오기
+//        model.addAttribute("container1SupplementCapacity", "50");
         HashMap<String, Integer> containerSupplementCapacity = storageService.containerSupplementCapacity();
         for(String key: containerSupplementCapacity.keySet()){
             model.addAttribute(key,containerSupplementCapacity.get(key).toString());
@@ -75,21 +88,12 @@ public class StorageViewController {
         return "/storage/storage";
     }
 
-
-    @GetMapping("/scan")
-    public String scanpage() {
-        return "/supplements/scan";
+    // 컨테이너 값을 세션에 저장
+    @PostMapping("/supplements/scan")
+    public String scan(@RequestParam("container") int container, HttpSession session) {
+        session.setAttribute("container", container); // 세션에 container 값 저장
+        return "/supplements/scan"; // 다음 페이지로 이동
     }
 
-    @GetMapping("/supplements/add")
-    public String addpage() {
-        return "/supplements/add";
-    }
-
-    @GetMapping("/supplements/scan")
-    public String addscanpage(@RequestParam("container") int container, Model model) {
-        model.addAttribute("container", container);
-        return "/supplements/scan";
-    }
 
 }

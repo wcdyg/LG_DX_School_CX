@@ -26,7 +26,7 @@ public class HomeViewController {
         model.addAttribute("username" , session.getAttribute("username"));
         model.addAttribute("userId", session.getAttribute("userId"));
 
-        return "/home";
+        return "/home/home";
     }
 
 }
