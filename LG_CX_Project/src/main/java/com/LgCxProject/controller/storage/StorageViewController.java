@@ -85,6 +85,13 @@ public class StorageViewController {
             model.addAttribute(key,containerColor.get(key));
         }
 
+<<<<<<< HEAD
+        model.addAttribute("container5Number", "5");
+        model.addAttribute("container6Number", "6");
+
+
+=======
+>>>>>>> a56f93b4812578412aec559a368f7c81a9a61cb6
         return "/storage/storage";
     }
 
