@@ -33,11 +33,29 @@
         h1 {
             margin-bottom: 40px;
         }
+        .input-container {
+            margin-bottom: 20px;
+            width: 100%;
+            max-width: 400px;
+        }
+        .input-container label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #888;
+        }
+        .input-container input {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
         .button-container {
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100%;
             width: 100%;
         }
         md-filled-button {
@@ -48,11 +66,15 @@
 </head>
 <body>
 <h1>바코드 스캔 화면</h1>
-<div class="button-container">
-    <form action="/supplements/add" method="get">
-      <input type="hidden" th:value="${storage}" name="storage">
-      <span th:text="${container}"></span>
-      <md-filled-button type="submit">스캔하기</md-filled-button>
+<div class="input-container">
+    <!-- Form을 input 필드와 버튼을 모두 감싸도록 수정 -->
+    <form action="/supplements/add" method="post">
+        <!-- supplementName 입력 필드 추가 -->
+        <input type="text" id="supplementName" name="supplementName" placeholder="영양제명을 입력해주세요" required>
+        <div class="button-container">
+            <!-- 스캔하기 버튼 -->
+            <md-filled-button type="submit">스캔하기</md-filled-button>
+        </div>
     </form>
 </div>
 </body>

@@ -41,14 +41,19 @@
             text-align: center;
             margin-bottom: 10px;
         }
-        .am-pm {
-            display: flex;
-            justify-content: flex-end;
-            margin-bottom: 10px;
-        }
         .time-labels {
             display: flex;
             justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        .time-inputs {
+            display: flex;
+            justify-content: space-between;
+        }
+        .time-inputs input {
+            font-size: 36px;
+            text-align: center;
+            width: 60px;
         }
         .time-actions {
             display: flex;
@@ -61,8 +66,9 @@
             --md-outlined-button-label-text-color: #6750A4;
             --md-outlined-button-outline-color: #6750A4;
         }
+
         .supplement-info {
-            background-color: #A50034;
+            background-color: #a29bfe;
             padding: 20px;
             border-radius: 12px;
             margin-bottom: 20px;
@@ -73,7 +79,7 @@
         }
 
         .myDB-supplement-info {
-            background-color: #A50034;
+            background-color: #fab1a0;
             padding: 20px;
             border-radius: 12px;
             margin-bottom: 20px;
@@ -83,144 +89,67 @@
             margin-bottom: 10px;
         }
 
-        .up-down-buttons {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
-        }
-        .up-down-buttons button {
-            margin: 0 10px;
-            font-size: 24px;
-        }
+
     </style>
 </head>
 <body>
 <div style="display: flex; align-items: center; font-size: 36px;">
     <strong>보관함</strong>
-    <h1 th:text="${storageNumber}" style="margin: 0 5px; font-size: inherit;"></h1>
+    <h1 th:text="${session.container}" style="margin: 0 5px; font-size: inherit;"></h1>
     <strong>번의 영양제 등록 화면</strong>
 </div>
 
-<!-- 영양제 정보 출력 -->
+<div th:if="${error}">
+    <p th:text="${error}"></p>
+</div>
+
 <div class="supplement-info">
     <div><strong>영양제 이름:</strong> <span th:text="${supplement_Name}">영양제 이름</span></div>
     <div><strong>영양제 성분:</strong> <span th:text="${main_ingredients}">성분 목록</span></div>
     <div><strong>섭취량:</strong> <span th:text="${intake_amount}">섭취량</span></div>
     <div><strong>섭취 횟수:</strong> <span th:text="${intake_frequency}">섭취 횟수</span></div>
-    <div><strong>섭취 주의사항:</strong> <span th:text="${intake_method}">섭취 주의사항</span></div>
+    <div><strong>복용법:</strong> <span th:text="${intake_method}">섭취방법입니당</span></div>
+    <div><strong>주의사항:</strong> <span th:text="${medication_precautions}">주의사항입니당</span></div>
 </div>
 
-<!--복용약 데이터와 비교하여 관련 정보 알려주기-->
 <div class="myDB-supplement-info">
-    <div><strong>My 복용약 기반 주의사항:</strong> <span th:text="${medication_precautions}">이런 약을 먹고 있으니 조심하세여!</span></div>
+    <div><strong>My 복용약 기반 주의사항:</strong> <span th:text="${mydata_notice}">김엘지님은 고칼슘혈증이 있어서 해당 영양제를 주의해야해요!</span></div>
 </div>
-
 
 <h2>섭취 시간 설정하기</h2>
-<!-- 타임 피커 -->
+
 <div class="time-picker">
     <div class="time-labels">
         <span>Hour</span>
         <span>Minute</span>
     </div>
-    <div class="time-display" id="time-display">00 : 00</div>
-    <div class="am-pm">
-        <md-filled-button id="am-button">AM</md-filled-button>
-        <md-outlined-button id="pm-button">PM</md-outlined-button>
-    </div>
-    <div class="up-down-buttons">
-        <button id="hour-up">▲</button>
-        <button id="minute-up">▲</button>
-    </div>
-    <div class="up-down-buttons">
-        <button id="hour-down">▼</button>
-        <button id="minute-down">▼</button>
+    <div class="time-inputs">
+        <input type="text" id="hour-input" name="hour" placeholder="00" maxlength="2">
+        <input type="text" id="minute-input" name="minute" placeholder="00" maxlength="2">
     </div>
 
     <div class="time-actions">
         <md-text-button id="reset-button">Cancel</md-text-button>
-        <form action="/storage/newstorage" method="get">
+        <form action="/storage/newstorage" method="post">
             <md-filled-button type="submit">Ok</md-filled-button>
         </form>
     </div>
 </div>
 
 <script>
-    let isPM = true;
-    let hour = 0;
-    let minute = 0;
-
-    const updateTimeDisplay = () => {
-        document.getElementById('time-display').innerText = `${hour.toString().padStart(2, '0')} : ${minute.toString().padStart(2, '0')}`;
-    };
-
-    const toggleButtonStyles = (selectedButton, unselectedButton) => {
-        // 'filled-button'인 상태와 'outlined-button'인 상태를 교체
-        const selectedButtonParent = selectedButton.parentNode;
-        const unselectedButtonParent = unselectedButton.parentNode;
-
-        // 새 버튼을 생성하고 기존 버튼을 교체
-        const filledButton = document.createElement('md-filled-button');
-        const outlinedButton = document.createElement('md-outlined-button');
-
-        filledButton.textContent = selectedButton.textContent;
-        outlinedButton.textContent = unselectedButton.textContent;
-
-        filledButton.id = selectedButton.id;
-        outlinedButton.id = unselectedButton.id;
-
-        // 기존 버튼을 대체
-        selectedButtonParent.replaceChild(filledButton, selectedButton);
-        unselectedButtonParent.replaceChild(outlinedButton, unselectedButton);
-
-        // 새로 생성된 버튼에 다시 이벤트 리스너 추가
-        addButtonListeners();
-    };
-
-    const addButtonListeners = () => {
-        document.getElementById('am-button').addEventListener('click', () => {
-            isPM = false;
-            toggleButtonStyles(document.getElementById('am-button'), document.getElementById('pm-button'));
-        });
-
-        document.getElementById('pm-button').addEventListener('click', () => {
-            isPM = true;
-            toggleButtonStyles(document.getElementById('pm-button'), document.getElementById('am-button'));
-        });
-    };
-
-    // 최초 실행 시 이벤트 리스너 추가
-    addButtonListeners();
-
-    document.getElementById('hour-up').addEventListener('click', () => {
-        hour = (hour + 1) % 24;
-        updateTimeDisplay();
-    });
-
-    document.getElementById('hour-down').addEventListener('click', () => {
-        hour = (hour - 1 + 24) % 24;
-        updateTimeDisplay();
-    });
-
-    document.getElementById('minute-up').addEventListener('click', () => {
-        minute = (minute + 1) % 60;
-        updateTimeDisplay();
-    });
-
-    document.getElementById('minute-down').addEventListener('click', () => {
-        minute = (minute - 1 + 60) % 60;
-        updateTimeDisplay();
-    });
+    const hourInput = document.getElementById('hour-input');
+    const minuteInput = document.getElementById('minute-input');
 
     document.getElementById('reset-button').addEventListener('click', () => {
-        hour = 0;
-        minute = 0;
-        updateTimeDisplay();
+        hourInput.value = '';
+        minuteInput.value = '';
     });
 
-    // 섭취 시간 설정 시 값을 서버로 전송하기
     document.querySelector('form').addEventListener('submit', (e) => {
-        const supplement_setting_time = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}${isPM ? ' PM' : ' AM'}`;
+        const hour = hourInput.value.padStart(2, '0');
+        const minute = minuteInput.value.padStart(2, '0');
+        const supplement_setting_time = `${hour}:${minute}`;
+
         const input = document.createElement('input');
         input.type = 'hidden';
         input.name = 'supplement_setting_time';
@@ -228,7 +157,6 @@
         e.target.appendChild(input);
     });
 
-<!--    updateTimeDisplay();-->
 </script>
 
 </body>
