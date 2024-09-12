@@ -1,16 +1,16 @@
 package com.LgCxProject.domain.medical_info;
+import com.LgCxProject.domain.storage.StorageId;
 import com.LgCxProject.domain.user.User;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import oracle.sql.DATE;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "tb_mydata")
-public class Mydata {
+@IdClass(MydataId.class)  // 복합 키 클래스 사용
+public class Mydata implements Serializable {
     @Id
     @Column(name = "medical_treatment_id")
     private String medicalTreatmentId;

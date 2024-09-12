@@ -11,7 +11,7 @@ import java.util.Optional;
 
 public interface StorageRepository extends JpaRepository<Storage, String> {
 
-    @Query(value = "select * from tb_storage where storage_id =:storageId",nativeQuery = true)
+    @Query(value = "select * from tb_storage where storage_id  =:storageId",nativeQuery = true)
     Optional<Storage> findStorageByStorageId(@Param(value="storageId") String storageId);
     
     
