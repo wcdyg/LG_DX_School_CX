@@ -1,97 +1,218 @@
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org" lang="ko">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>로그인</title>-->
+<!--    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">-->
+<!--    <script type="importmap">-->
+<!--        {-->
+<!--          "imports": {-->
+<!--            "@material/web/": "https://esm.run/@material/web/"-->
+<!--          }-->
+<!--        }-->
+<!--    </script>-->
+<!--    <script type="module">-->
+<!--        import '@material/web/all.js';-->
+<!--        import {styles as typescaleStyles} from '@material/web/typography/md-typescale-styles.js';-->
+
+<!--        document.adoptedStyleSheets.push(typescaleStyles.styleSheet);-->
+<!--    </script>-->
+<!--    <style>-->
+<!--        body {-->
+<!--            font-family: 'Roboto', sans-serif;-->
+<!--            display: flex;-->
+<!--            justify-content: center;-->
+<!--            align-items: center;-->
+<!--            height: 100vh;-->
+<!--            margin: 0;-->
+<!--            background-color: #f5f5f5;-->
+<!--        }-->
+<!--        .login-container {-->
+<!--            background-color: white;-->
+<!--            padding: 30px;-->
+<!--            border-radius: 8px;-->
+<!--            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);-->
+<!--            text-align: center;-->
+<!--            width: 350px;-->
+<!--            position: relative;-->
+<!--        }-->
+<!--        .title {-->
+<!--            font-size: 28px;-->
+<!--            font-weight: bold;-->
+<!--            margin-bottom: 20px;-->
+<!--        }-->
+<!--        .error {-->
+<!--            color: #ff0000;-->
+<!--            font-weight: bold;-->
+<!--            margin-top: 10px;-->
+<!--        }-->
+<!--        md-outlined-text-field {-->
+<!--            width: 100%;-->
+<!--            margin-bottom: 15px;-->
+<!--        }-->
+<!--        md-filled-button {-->
+<!--            width: 100%;-->
+<!--            margin: 10px 0;-->
+<!--            &#45;&#45;md-filled-button-container-color: #007BFF;-->
+<!--            &#45;&#45;md-filled-button-label-text-color: white;-->
+<!--        }-->
+<!--        md-filled-button.signup {-->
+<!--            &#45;&#45;md-filled-button-container-color: #28a745;-->
+<!--        }-->
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div class="login-container">-->
+<!--    <div class="title"><b>로그인</b></div>-->
+
+<!--    <form action="/login-process" method="post">-->
+<!--        <md-outlined-text-field-->
+<!--                label="아이디"-->
+<!--                type="text"-->
+<!--                name="userId"-->
+<!--                th:value="${userId}"-->
+<!--                required-->
+<!--        ></md-outlined-text-field>-->
+
+<!--        <md-outlined-text-field-->
+<!--                label="비밀번호"-->
+<!--                type="password"-->
+<!--                name="password"-->
+<!--                th:value="${password}"-->
+<!--                required-->
+<!--        ></md-outlined-text-field>-->
+
+<!--        &lt;!&ndash; 경고 메시지 영역 &ndash;&gt;-->
+<!--        <div class="error"><span th:text="${error}"></span></div>-->
+
+<!--        <md-filled-button type="submit">로그인</md-filled-button>-->
+<!--    </form>-->
+
+<!--    <form action="/user/signup" method="get">-->
+<!--        <md-filled-button type="submit" class="signup">회원가입</md-filled-button>-->
+<!--    </form>-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->
+
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>로그인</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <script type="importmap">
-        {
-          "imports": {
-            "@material/web/": "https://esm.run/@material/web/"
-          }
-        }
-    </script>
-    <script type="module">
-        import '@material/web/all.js';
-        import {styles as typescaleStyles} from '@material/web/typography/md-typescale-styles.js';
-
-        document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
-    </script>
+    <title>LG ThinQ 로그인</title>
+    <!-- Materialize CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
         body {
-            font-family: 'Roboto', sans-serif;
             display: flex;
+            min-height: 100vh;
+            flex-direction: column;
             justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
             background-color: #f5f5f5;
         }
         .login-container {
             background-color: white;
             padding: 30px;
             border-radius: 8px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            width: 350px;
-            position: relative;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            max-width: 400px;
+            margin: auto;
         }
-        .title {
-            font-size: 28px;
-            font-weight: bold;
+        .logo {
+            text-align: center;
             margin-bottom: 20px;
         }
-        .error {
-            color: #ff0000;
-            font-weight: bold;
+        .logo img {
+            max-width: 150px;
+        }
+        .input-field input:focus + label {
+            color: #c4175c !important;
+        }
+        .input-field input:focus {
+            border-bottom: 1px solid #c4175c !important;
+            box-shadow: 0 1px 0 0 #c4175c !important;
+        }
+        .btn-login {
+            background-color: #c4175c;
+            width: 100%;
+            margin-top: 20px;
+        }
+        .btn-login:hover {
+            background-color: #a1134b;
+        }
+        .links {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+        .links a {
+            color: #757575;
+            font-size: 0.9rem;
+        }
+        .divider {
+            margin: 20px 0;
+        }
+        .btn-signup, .btn-other-login {
+            width: 100%;
             margin-top: 10px;
         }
-        md-outlined-text-field {
-            width: 100%;
-            margin-bottom: 15px;
+        .btn-other-login {
+            background-color: #fff;
+            color: #000;
+            border: 1px solid #ddd;
         }
-        md-filled-button {
-            width: 100%;
-            margin: 10px 0;
-            --md-filled-button-container-color: #007BFF;
-            --md-filled-button-label-text-color: white;
-        }
-        md-filled-button.signup {
-            --md-filled-button-container-color: #28a745;
+        .btn-other-login i {
+            margin-right: 10px;
         }
     </style>
 </head>
 <body>
-<div class="login-container">
-    <div class="title"><b>로그인</b></div>
+<div class="container">
+    <div class="login-container">
+        <div class="logo">
+            <img src="/img/lg-thinq-1.png" alt="LG ThinQ Logo" th:src="@{/img/lg-thinq-1.png}">
+        </div>
 
-    <form action="/login-process" method="post">
-        <md-outlined-text-field
-                label="아이디"
-                type="text"
-                name="userId"
-                th:value="${userId}"
-                required
-        ></md-outlined-text-field>
+        <form action="/login-process" method="post">
+            <div class="input-field">
+                <input id="userId" type="text" name="userId" th:value="${userId}" required>
+                <label for="userId">이메일 아이디 또는 휴대폰 번호 아이디</label>
+            </div>
 
-        <md-outlined-text-field
-                label="비밀번호"
-                type="password"
-                name="password"
-                th:value="${password}"
-                required
-        ></md-outlined-text-field>
+            <div class="input-field">
+                <input id="password" type="password" name="password" th:value="${password}" required>
+                <label for="password">비밀번호</label>
+            </div>
 
-        <!-- 경고 메시지 영역 -->
-        <div class="error"><span th:text="${error}"></span></div>
+            <button class="btn waves-effect waves-light btn-login" type="submit">로그인</button>
+        </form>
 
-        <md-filled-button type="submit">로그인</md-filled-button>
-    </form>
+        <div class="links">
+            <a href="#">아이디 찾기</a>
+            <a href="#">비밀번호 재설정</a>
+            <a href="/user/signup">회원가입</a>
+        </div>
 
-    <form action="/user/signup" method="get">
-        <md-filled-button type="submit" class="signup">회원가입</md-filled-button>
-    </form>
+        <div class="divider"></div>
+
+        <a href="#" class="btn waves-effect waves-light btn-other-login">
+            <i class="material-icons left">account_circle</i>
+            다른 계정으로 로그인
+        </a>
+
+        <!-- 소셜 로그인 버튼 -->
+        <div style="text-align: center; margin-top: 20px;">
+            <a href="#" class="btn-floating btn-large waves-effect waves-light green"><i class="material-icons">person</i></a>
+            <a href="#" class="btn-floating btn-large waves-effect waves-light yellow darken-2"><i class="material-icons">chat</i></a>
+        </div>
+    </div>
 </div>
+
+<!-- Materialize JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </body>
 </html>

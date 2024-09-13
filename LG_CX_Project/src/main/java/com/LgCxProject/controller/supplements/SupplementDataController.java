@@ -1,8 +1,11 @@
 package com.LgCxProject.controller.supplements;
 
+import com.LgCxProject.domain.storage.Storage;
 import com.LgCxProject.domain.storage.UserStorageInfo;
 import com.LgCxProject.domain.supplements.Supplements;
+import com.LgCxProject.repository.storage.StorageRepository;
 import com.LgCxProject.repository.storage.UserStorageRepository;
+import com.LgCxProject.repository.supplements.SupplementRepository;
 import com.LgCxProject.service.supplements.SupplementService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,37 +20,15 @@ import java.time.format.DateTimeParseException;
 import java.util.Calendar;
 import java.util.Date;
 
-//@RestController
-//@Controller
-//public class SupplementDataController {
-//
-//    @Autowired
-//    SupplementService supplementService;
-//
-//    // 시간정보 저장하기
-//    @PostMapping("/saveIntakeTime")
-//    @ResponseBody
-//    public void storageSaveProcess(@RequestParam(name = "hour") String hour,
-//                                     @RequestParam(name = "minute") String minute,
-//                                     HttpSession session, Model model) {
-////        LocalTime intakeTime = LocalTime.parse(hour + ":" + minute);
-////        // 세션에 시간 정보 저장
-////        session.setAttribute("intakeTime", intakeTime);
-////
-//////        UserStorageInfo userStorageInfo = supplementService.makeSupplementUserStorage(supplements.getSupplementId(),supplements.getIntakeAmount(),
-//////                (String) session.getAttribute("userId"), intakeTime, session);
-////
-////        System.out.println(intakeTime);
-////        return;
-//
-//    }
-//}
-
 @RestController
 public class SupplementDataController {
 
     @Autowired
     UserStorageRepository userStorageRepository;
+    @Autowired
+    StorageRepository storageRepository;
+    @Autowired
+    SupplementRepository supplementRepository;
 
     @Autowired
     SupplementService supplementService;
@@ -57,7 +38,6 @@ public class SupplementDataController {
                                                  @RequestParam(name = "minute") Integer minute,
                                                  HttpSession session) {
         try {
-
             LocalTime intakeTime = LocalTime.of(hour, minute); // 예: 14:30
             // LocalTime을 java.util.Date로 변환
             Date convertedDate = convertLocalTimeToDate(intakeTime);
@@ -93,7 +73,15 @@ public class SupplementDataController {
         Date intakeTime = (Date) session.getAttribute("intakeTime");
         UserStorageInfo userStorageInfo = supplementService.makeSupplementUserStorage(supplementId,suppleOutAmount,userId,intakeTime,session);
 
+        Storage storage = new Storage();
+        storage.setStorageId(userStorageInfo.getStorageId());
+        storage.setSupplementId(supplementId);
+        storage.setProductId(userStorageInfo.getProductId());
+        storage.setStock(supplementRepository.findBySupplementId(supplementId).get().getSupplementCapacity());
+
         userStorageRepository.save(userStorageInfo);
+        storageRepository.save(storage);
+
         return "/storage/newstorage";
     }
 }

@@ -1,68 +1,348 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title th:text="${pageTitle}">디스펜서 화면(영양제 등록 후)</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <script type="importmap">
-        {
-          "imports": {
-            "@material/web/": "https://esm.run/@material/web/"
-          }
-        }
-    </script>
-    <script type="module">
-        import '@material/web/all.js';
-        import {styles as typescaleStyles} from '@material/web/typography/md-typescale-styles.js';
-
-        document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
-    </script>
+    <title>필유 보관함</title>
+    <!-- Materialize CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
         body {
-            font-family: 'Roboto', sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
-            background-color: #f5f5f5;
+            background-color: #EFEFF5;
+            padding: 0;
+            padding-bottom: 60px;
         }
-        h1 {
-            margin-bottom: 20px;
+
+        nav {
+            background-color: transparent;
+            box-shadow: none;
         }
-        .button-container {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            width: 100%;
-            max-width: 300px;
+
+        nav .brand-logo, nav ul a, nav i {
+            color: #171D1E;
         }
-        md-filled-button {
-            --md-filled-button-container-color: #6750A4;
-            --md-filled-button-label-text-color: white;
-            width: 100%;
+        .container {
+            padding-top: 100px; /* Adjust this value to match the 'Kitchen' text position */
+            margin-left: 80px;
+            margin-right: 80px;
+            width: calc(100% - 160px);
+        }
+
+        .card-content {
+            padding: 16px !important;
+        }
+
+        .card-title {
+            font-size: 18px !important;
+            margin-bottom: 8px !important;
+        }
+
+        .progress {
+            margin: 10px 0;
+            background-color: #e0e0e0;
+        }
+
+        .card .card-content .card-title {
+            line-height: 24px;
+        }
+
+        .card-action {
+            padding: 8px 16px !important;
+            text-align: right;
+        }
+
+        .btn-floating {
+            position: static !important;
+        }
+
+        .progress .determinate.full {
+            background-color: #30AD6B;
+            /* 100% */
+        }
+
+        .progress .determinate.high {
+            background-color: #0065DC;
+            /* 75% < x < 100% */
+        }
+
+        .progress .determinate.medium {
+            background-color: #17A2B8;
+            /* 50% < x <= 75% */
+        }
+
+        .progress .determinate.low {
+            background-color: #EA9703;
+            /* 25% < x <= 50% */
+        }
+
+        .progress .determinate.few {
+            background-color: #EB4141;
+            /* x <= 25% */
         }
     </style>
 </head>
+
 <body>
-<h1 th:text="${headerText}">디스펜서 화면(영양제 등록 후)</h1>
+<nav>
+    <div class="nav-wrapper">
+        <a href="#" class="brand-logo center">pillU</a>
+        <ul id="nav-mobile" class="left">
+            <li><a href="#"><i class="material-icons">arrow_back</i></a></li>
+        </ul>
+        <ul id="nav-mobile" class="right">
+            <li><a href="#"><i class="material-icons">more_vert</i></a></li>
+        </ul>
+    </div>
+</nav>
 
-<div class="button-container">
-    <md-filled-button th:text="${mainButtonText}">알약 토출하기</md-filled-button>
+<div class="container">
+    <div class="row">
+        <!-- 보관함 1 -->
+        <div class="col s12 m6 l4">
+            <div class="card">
+                <div class="card-content" th:style="'background-color: ' + ${container1CardContentColor}">
+                    <div class="rectangle">
+                        <span class="card-title" th:text="보관함 + ${container1Number}"></span>
+                        <!-- 토출 버튼 -->
+                        <button class="btn-floating btn-small waves-effect waves-light yellow darken-2 discharge-button"
+                                th:if="${container1Color.equals('#ffffff')}" title="토출"
+                                onclick="discharge('1')">
+                            <i class="material-icons">medication</i>
+                        </button>
+                    </div>
+                        <div th:if="${container1Username != null}" th:utext="${container1Username}"></div>
+                        <div th:if="${container1 != null}" th:text="${container1}"></div>
+                        <div class="progress" th:if="${container1SupplementCount != null and container1SupplementCapacity != null}">
+                            <div th:with="percent=${container1SupplementCount}/${container1SupplementCapacity}*100"
+                                 th:class="|determinate ${percent == 100 ? 'full' : percent > 75 ? 'high' : percent > 50 ? 'medium' : percent > 25 ? 'low' : 'few'}|"
+                                 th:style="|width: ${percent}%|">
+                            </div>
+                        </div>
+                        <div th:unless="${container1SupplementCount != null and container1SupplementCapacity != null}">
+                            <p>정보가 없습니다.</p>
+                        </div>
+                        <div class="bottom-left" th:if="${container1SupplementCount != null && container1SupplementCapacity != null}"
+                             th:text="'보관함1에 적재된 영양제 : ' + ${container1SupplementCount} + '/' + ${container1SupplementCapacity} + ' 개'">
+                        </div>
+                    </div>
+                    <div class="card-action">
+                        <a href="#" class="btn-floating btn-small waves-effect waves-light red">
+                            <i class="material-icons">delete</i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    <md-filled-button th:text="${subButtonText}">영양제 토출하기: 전체 (1, 2, 5번)</md-filled-button>
+        <!-- 보관함 2 -->
+        <div class="col s12 m6 l4">
+            <div class="card">
+                <div class="card-content" th:style="'background-color: ' + ${container2CardContentColor}">
+                    <div class="rectangle">
+                        <span class="card-title" th:text="보관함 + ${container2Number}"></span>
+                        <!-- 토출 버튼 -->
+                        <button class="btn-floating btn-small waves-effect waves-light yellow darken-2 discharge-button"
+                                th:if="${container1Color.equals('#ffffff')}" title="토출"
+                                onclick="discharge('2')">
+                            <i class="material-icons">medication</i>
+                        </button>
+                    </div>
+                        <div th:if="${container2Username != null}" th:utext="${container2Username}"></div>
+                        <div th:if="${container2 != null}" th:text="${container2}"></div>
+                        <div class="progress" th:if="${container2SupplementCount != null and container2SupplementCapacity != null}">
+                            <div th:with="percent=${container2SupplementCount}/${container2SupplementCapacity}*100"
+                                 th:class="|determinate ${percent == 100 ? 'full' : percent > 75 ? 'high' : percent > 50 ? 'medium' : percent > 25 ? 'low' : 'few'}|"
+                                 th:style="|width: ${percent}%|">
+                            </div>
+                        </div>
+                        <div th:unless="${container2SupplementCount != null and container2SupplementCapacity != null}">
+                            <p>정보가 없습니다.</p>
+                        </div>
+                        <div class="bottom-left" th:if="${container2SupplementCount != null && container2SupplementCapacity != null}"
+                             th:text="'보관함2에 적재된 영양제 : ' + ${container2SupplementCount} + '/' + ${container2SupplementCapacity} + ' 개'">
+                        </div>
+                    </div>
+                    <div class="card-action">
+                        <a href="#" class="btn-floating btn-small waves-effect waves-light red">
+                            <i class="material-icons">delete</i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    <md-filled-button th:text="${subButtonText}">영양제 토출하기: 1번</md-filled-button>
-    <md-filled-button th:text="${subButtonText}">영양제 토출하기: 2번</md-filled-button>
-    <md-filled-button th:text="${subButtonText}">영양제 토출하기: 3번</md-filled-button>
-    <md-filled-button th:text="${subButtonText}">영양제 토출하기: 4번</md-filled-button>
-    <md-filled-button th:text="${subButtonText}">영양제 토출하기: 5번</md-filled-button>
-    <md-filled-button th:text="${subButtonText}">영양제 토출하기: 6번</md-filled-button>
+        <!-- 보관함 3 -->
+        <div class="col s12 m6 l4">
+            <div class="card">
+                <div class="card-content" th:style="'background-color: ' + ${container3CardContentColor}">
+                    <div class="rectangle">
+                        <span class="card-title" th:text="보관함 + ${container3Number}"></span>
+                        <!-- 토출 버튼 -->
+                        <button class="btn-floating btn-small waves-effect waves-light yellow darken-2 discharge-button"
+                                th:if="${container1Color.equals('#ffffff')}" title="토출"
+                                onclick="discharge('3')">
+                            <i class="material-icons">medication</i>
+                        </button>
+                    </div>
+                        <div th:if="${container3Username != null}" th:utext="${container3Username}"></div>
+                        <div th:if="${container3 != null}" th:text="${container3}"></div>
+                        <div class="progress" th:if="${container3SupplementCount != null and container3SupplementCapacity != null}">
+                            <div th:with="percent=${container3SupplementCount}/${container3SupplementCapacity}*100"
+                                 th:class="|determinate ${percent == 100 ? 'full' : percent > 75 ? 'high' : percent > 50 ? 'medium' : percent > 25 ? 'low' : 'few'}|"
+                                 th:style="|width: ${percent}%|">
+                            </div>
+                        </div>
+                        <div th:unless="${container3SupplementCount != null and container3SupplementCapacity != null}">
+                            <p>정보가 없습니다.</p>
+                        </div>
+                        <div class="bottom-left" th:if="${container3SupplementCount != null && container3SupplementCapacity != null}"
+                             th:text="'보관함3에 적재된 영양제 : ' + ${container3SupplementCount} + '/' + ${container3SupplementCapacity} + ' 개'">
+                        </div>
+                    </div>
+                    <div class="card-action">
+                        <a href="#" class="btn-floating btn-small waves-effect waves-light red">
+                            <i class="material-icons">delete</i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-<!--    포매팅 버전 -->
-<!--    <md-filled-button th:each="compartment : ${compartments}"-->
-<!--                      th:text="${'영양제 추출하기: ' + compartment + '번'}">-->
-<!--    </md-filled-button>-->
-</div>
+        <!-- 보관함 4 -->
+        <div class="col s12 m6 l4">
+            <div class="card">
+                <div class="card-content" th:style="'background-color: ' + ${container4CardContentColor}">
+                    <div class="rectangle">
+                        <span class="card-title" th:text="보관함 + ${container4Number}"></span>
+                        <!-- 토출 버튼 -->
+                        <button class="btn-floating btn-small waves-effect waves-light yellow darken-2 discharge-button"
+                                th:if="${container1Color.equals('#ffffff')}" title="토출"
+                                onclick="discharge('4')">
+                            <i class="material-icons">medication</i>
+                        </button>
+                    </div>
+                        <div th:if="${container4Username != null}" th:utext="${container4Username}"></div>
+                        <div th:if="${container4 != null}" th:text="${container4}"></div>
+                        <div class="progress" th:if="${container4SupplementCount != null and container4SupplementCapacity != null}">
+                            <div th:with="percent=${container4SupplementCount}/${container4SupplementCapacity}*100"
+                                 th:class="|determinate ${percent == 100 ? 'full' : percent > 75 ? 'high' : percent > 50 ? 'medium' : percent > 25 ? 'low' : 'few'}|"
+                                 th:style="|width: ${percent}%|">
+                            </div>
+                        </div>
+                        <div th:unless="${container4SupplementCount != null and container4SupplementCapacity != null}">
+                            <p>정보가 없습니다.</p>
+                        </div>
+                        <div class="bottom-left" th:if="${container4SupplementCount != null && container4SupplementCapacity != null}"
+                             th:text="'보관함4에 적재된 영양제 : ' + ${container4SupplementCount} + '/' + ${container4SupplementCapacity} + ' 개'">
+                        </div>
+                    </div>
+                    <div class="card-action">
+                        <a href="#" class="btn-floating btn-small waves-effect waves-light red">
+                            <i class="material-icons">delete</i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 보관함 5 -->
+        <div class="col s12 m6 l4">
+            <div class="card">
+                <div class="card-content" th:style="'background-color: ' + ${container5CardContentColor}">
+                    <div class="rectangle">
+                        <span class="card-title" th:text="보관함 + ${container5Number}"></span>
+                        <!-- 토출 버튼 -->
+                        <button class="btn-floating btn-small waves-effect waves-light yellow darken-2 discharge-button"
+                                th:if="${container1Color.equals('#ffffff')}" title="토출"
+                                onclick="discharge('5')">
+                            <i class="material-icons">medication</i>
+                        </button>
+                    </div>
+                        <div th:if="${container5Username != null}" th:utext="${container5Username}"></div>
+                        <div th:if="${container5 != null}" th:text="${container5}"></div>
+                        <div class="progress" th:if="${container5SupplementCount != null and container5SupplementCapacity != null}">
+                            <div th:with="percent=${container5SupplementCount}/${container5SupplementCapacity}*100"
+                                 th:class="|determinate ${percent == 100 ? 'full' : percent > 75 ? 'high' : percent > 50 ? 'medium' : percent > 25 ? 'low' : 'few'}|"
+                                 th:style="|width: ${percent}%|">
+                            </div>
+                        </div>
+                        <div th:unless="${container5SupplementCount != null and container5SupplementCapacity != null}">
+                            <p>비어 있음</p>
+                        </div>
+                        <div class="bottom-left" th:if="${container5SupplementCount != null && container5SupplementCapacity != null}"
+                             th:text="'보관함5에 적재된 영양제 : ' + ${container5SupplementCount} + '/' + ${container5SupplementCapacity} + ' 개'">
+                        </div>
+                    </div>
+                    <!--                    <div class="card-action">-->
+                    <!--                        <a href="#" class="btn-floating btn-small waves-effect waves-light red">-->
+                    <!--                            <i class="material-icons">delete</i>-->
+                    <!--                        </a>-->
+                    <!--                    </div>-->
+                    <form action="/supplements/scan" method="post">
+                        <input type="hidden" name="container" th:value="${container5Number}">
+                        <div class="card-action">
+                            <button type="submit" class="btn-floating btn-small waves-effect waves-light green">
+                                <i class="material-icons">add</i>
+                            </button>
+                        </div>
+                    </form>
+                    <!-- 영양제가 등록되지 않았을 때만 적재된 영양제 정보 숨김 -->
+                    <div class="bottom-left" th:if="${container5SupplementCount == null}"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 보관함 6 -->
+        <div class="col s12 m6 l4">
+            <div class="card">
+                <div class="card-content" th:style="'background-color: ' + ${container6CardContentColor}">
+                    <div class="rectangle">
+                        <span class="card-title" th:text="보관함 + ${container6Number}"></span>
+                        <!-- 토출 버튼 -->
+                        <button class="btn-floating btn-small waves-effect waves-light yellow darken-2 discharge-button"
+                                th:if="${container1Color.equals('#ffffff')}" title="토출"
+                                onclick="discharge('6')">
+                            <i class="material-icons">medication</i>
+                        </button>
+                    </div>
+                        <div th:if="${container6Username != null}" th:utext="${container6Username}"></div>
+                        <div th:if="${container6 != null}" th:text="${container6}"></div>
+                        <div class="progress" th:if="${container6SupplementCount != null and container6SupplementCapacity != null}">
+                            <div th:with="percent=${container6SupplementCount}/${container6SupplementCapacity}*100"
+                                 th:class="|determinate ${percent == 100 ? 'full' : percent > 75 ? 'high' : percent > 50 ? 'medium' : percent > 25 ? 'low' : 'few'}|"
+                                 th:style="|width: ${percent}%|">
+                            </div>
+                        </div>
+                        <div th:unless="${container6SupplementCount != null and container6SupplementCapacity != null}">
+                            <p>비어 있음</p>
+                        </div>
+                        <div class="bottom-left" th:if="${container6SupplementCount != null && container6SupplementCapacity != null}"
+                             th:text="'보관함6에 적재된 영양제 : ' + ${container6SupplementCount} + '/' + ${container6SupplementCapacity} + ' 개'">
+                        </div>
+                    </div>
+                    <!--                    <div class="card-action">-->
+                    <!--                        <a href="#" class="btn-floating btn-small waves-effect waves-light red">-->
+                    <!--                            <i class="material-icons">delete</i>-->
+                    <!--                        </a>-->
+                    <!--                    </div>-->
+                    <form action="/supplements/scan" method="post">
+                        <input type="hidden" name="container" th:value="${container6Number}">
+                        <div class="card-action">
+                            <button type="submit" class="btn-floating btn-small waves-effect waves-light green">
+                                <i class="material-icons">add</i>
+                            </button>
+                        </div>
+                    </form>
+                    <!-- 영양제가 등록되지 않았을 때만 적재된 영양제 정보 숨김 -->
+                    <div class="bottom-left" th:if="${container6SupplementCount == null}"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </body>
+
 </html>

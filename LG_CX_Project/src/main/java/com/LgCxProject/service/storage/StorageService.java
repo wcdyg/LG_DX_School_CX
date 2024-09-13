@@ -96,24 +96,27 @@ public class StorageService {
         // 모든 보관함에 기본 색상 적용
         for(int i=1; i < 7; i++){
             String key = String.format("container%sColor",i);
-            containerColor.put(key,"#b09fbf");
+            containerColor.put(key,"#E6E6E6");
         }
         // 보관함 정보가 있는 보관함에 사용자가 쓰는 색상 적용
         List<Storage> storages = storageRepository.findAll();
         for(Storage storage: storages) {
             String storageNum = storage.getStorageId().replaceAll("[^1-9]", "");
             String key = String.format("container%sColor", storageNum);
-            containerColor.put(key, "#FFA01E");
+            containerColor.put(key, "#F0ECE4");
         }
         // 현재 userId가 사용하는 보관함에 user색상 적용
         List<UserStorageInfo> userStorageInfoList = userStorageRepository.findStorageByUserId(userId);
         for(UserStorageInfo userStorageInfo: userStorageInfoList) {
             String storageNum = userStorageInfo.getStorageId().replaceAll("[^1-9]", "");
             String key = String.format("container%sColor", storageNum);
-            containerColor.put(key, "#FF5050");
+            containerColor.put(key, "#ffffff");
         }
         return containerColor;
     }
 
+//    public void decrementSupplementCount(String containerId) {
+//        storageRepository.decrementSupplementCount(containerId);
+//    }
 
 }

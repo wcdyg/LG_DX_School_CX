@@ -4,51 +4,183 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title th:text="${pageTitle}">홈 > 제품카드 선택 화면</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <script type="importmap">
-        {
-          "imports": {
-            "@material/web/": "https://esm.run/@material/web/"
-          }
-        }
-    </script>
-    <script type="module">
-        import '@material/web/all.js';
-        import {styles as typescaleStyles} from '@material/web/typography/md-typescale-styles.js';
-
-        document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
-    </script>
+    <!-- Materialize CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
         body {
-            font-family: 'Roboto', sans-serif;
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
             min-height: 100vh;
-            margin: 0;
-            background-color: #f5f5f5;
+            flex-direction: column;
+            background-image: url('/img/home.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+        main {
+            flex: 1 0 auto;
+            display: flex;
+            padding-top: 64px; /* nav의 높이만큼 padding 추가 */
+        }
+        nav {
+            background-color: transparent;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: none; /* 그림자 효과 제거 */
+        }
+        nav .brand-logo, nav ul a, nav i {
+            color: #171D1E; /* 네비게이션 텍스트와 아이콘 색상 변경 */
+        }
+        nav .brand-logo {
+            font-weight: bold;
+        }
+        .content {
             padding: 20px;
+            width: calc(100% - 160px); /* 양쪽 margin을 고려한 너비 설정 */
+            margin-left: 80px;
+            margin-right: 80px;
         }
-        h1 {
-            margin-bottom: 40px;
+        .product-card {
+            cursor: pointer;
         }
-        md-filled-button {
-            --md-filled-button-container-color: #6750A4;
-            --md-filled-button-label-text-color: white;
+        .product-card .card-content {
+            padding: 10px;
+        }
+        .product-card .card-title {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+        .product-card .status {
+            font-size: 14px;
+            color: #757575;
+        }
+        .section-title {
+            font-size: 24px;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            color: #171D1E;
         }
     </style>
 </head>
 <body>
-<h1>홈 > 제품카드 선택 화면</h1>
+<header>
+    <nav>
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo center" th:text="${username} + ' 홈'">김엘지 홈</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="#"><i class="material-icons">search</i></a></li>
+                <li><a href="#"><i class="material-icons">notifications</i></a></li>
+                <li><a href="#"><i class="material-icons">settings</i></a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
 
-<form action="/storage/storage" method="get">
-    <md-filled-button>배너 선택하기</md-filled-button>
-</form>
-<h1 class="mt-4">환영합니다. <span th:text="${username}"></span> 님</h1>
+<main>
+    <div class="content">
+        <h5 class="section-title"><strong>주방</strong></h5>
+        <div class="row">
+            <div class="col s12 m6 l3">
+                <div class="card product-card" data-product-id="pilyu">
+                    <div class="card-image">
+                        <img src="/img/image-pillU.png" alt="필유" width="300" height="200">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title">pillU</span>
+                        <p class="status">켜짐</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m6 l3">
+                <div class="card product-card" data-product-id="water-purifier">
+                    <div class="card-image">
+                        <img src="/img/image-53.png" alt="정수기" width="300" height="200">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title">정수기</span>
+                        <p class="status">켜짐</p>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-<div th:if="${showAdditionalInfo}">
-    <p th:text="${additionalInfo}"></p>
-</div>
+        <h5 class="section-title"><strong>드레스룸</strong></h5>
+        <div class="row">
+            <div class="col s12 m6 l3">
+                <div class="card product-card" data-product-id="tiiun-mini">
+                    <div class="card-image">
+                        <img src="/img/image-56.png" alt="틔운 미니" width="300" height="200">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title">틔운 미니</span>
+                        <p class="status">꺼짐</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m6 l3">
+                <div class="card product-card" data-product-id="styler">
+                    <div class="card-image">
+                        <img src="/img/image-54.png" alt="스타일러" width="300" height="200">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title">스타일러</span>
+                        <p class="status">켜짐</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m6 l3">
+                <div class="card product-card" data-product-id="shoecase">
+                    <div class="card-image">
+                        <img src="/img/image-58.png" alt="슈케이스" width="300" height="200">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title">슈케이스</span>
+                        <p class="status">켜짐</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m6 l3">
+                <div class="card product-card" data-product-id="aero-tower">
+                    <div class="card-image">
+                        <img src="/img/image-55.png" alt="에어로타워" width="300" height="200">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title">에어로타워</span>
+                        <p class="status">켜짐</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- Materialize JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('DOM loaded');
+        const cards = document.querySelectorAll('.product-card');
+        console.log('Found ' + cards.length + ' product cards');
+
+        cards.forEach(card => {
+            card.addEventListener('click', function(event) {
+                event.preventDefault(); // 기본 동작 방지
+                const productId = this.getAttribute('data-product-id');
+                console.log('Clicked product: ' + productId);
+                if (productId === 'pilyu') {
+                    console.log('Navigating to /storage/storage');
+                    window.location.href = '/storage/storage';
+                } else {
+                    console.log('No action for this product');
+                }
+            });
+        });
+    });
+</script>
 </body>
 </html>

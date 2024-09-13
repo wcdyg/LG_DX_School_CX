@@ -61,14 +61,14 @@ public class StorageViewController {
 //        model.addAttribute("container1SupplementCount", "27");
         HashMap<String ,Integer> containerSupplementCount = storageService.containerSupplementCount();
         for(String key: containerSupplementCount.keySet()){
-            model.addAttribute(key,containerSupplementCount.get(key).toString());
+            model.addAttribute(key,containerSupplementCount.get(key));
         }
 
         // 보관함 별 영양제 용량 가져오기
 //        model.addAttribute("container1SupplementCapacity", "50");
         HashMap<String, Integer> containerSupplementCapacity = storageService.containerSupplementCapacity();
         for(String key: containerSupplementCapacity.keySet()){
-            model.addAttribute(key,containerSupplementCapacity.get(key).toString());
+            model.addAttribute(key,containerSupplementCapacity.get(key));
         }
 
         // 보관함 별 영양제 이름 가져오기
